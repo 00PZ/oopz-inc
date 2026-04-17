@@ -1,0 +1,6 @@
+# Runtime data — NOT part of the importable package.
+# Populated by adapter scripts at runtime, consumed by agents.
+.evidence/
+
+# Script dependencies
+assets/scripts/node_modules/

@@ -1,0 +1,10 @@
+schema: paperclip/v1
+# Deliberately minimal. Agents do NOT need any DB credentials.
+# Database access is confined to external scripts in assets/scripts/,
+# which run outside Paperclip (user shell, Trigger.dev, cron). Agents
+# consume the resulting markdown in .evidence/knowledge/<niche-slug>/.
+#
+# Add per-agent env overrides here ONLY when a real need surfaces
+# (e.g. GH_TOKEN for an agent that files issues on GitHub).
+# Runtime handles API keys. Do not set an adapter unless Shoshin
+# targets a specific runtime.

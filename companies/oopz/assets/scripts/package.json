@@ -1,0 +1,15 @@
+{
+  "name": "oopz-kb-scripts",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "postgres": "^3.4.0",
+    "zod": "^3.23.0"
+  },
+  "scripts": {
+    "fetch:x-posts": "bun run fetch-x-posts.ts",
+    "fetch:web-article": "bun run fetch-web-article.ts",
+    "project:kb": "bun run kb-to-markdown.ts",
+    "validate:kb": "bun run validate-kb.ts"
+  }
+}
