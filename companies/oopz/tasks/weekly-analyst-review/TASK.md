@@ -2,6 +2,7 @@
 name: Weekly Analyst Review
 slug: weekly-analyst-review
 assignee: analyst
+project: shoshin
 schedule:
   timezone: Europe/Amsterdam
   startsAt: 2026-04-24T16:00:00+02:00

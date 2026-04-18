@@ -2,6 +2,7 @@
 name: Trend Scan (Evening)
 slug: trend-scan-evening
 assignee: scout
+project: shoshin
 schedule:
   timezone: Europe/Amsterdam
   startsAt: 2026-04-20T18:00:00+02:00
