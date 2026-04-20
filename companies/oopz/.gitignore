@@ -1,6 +1,18 @@
-# Runtime data — NOT part of the importable package.
-# Populated by adapter scripts at runtime, consumed by agents.
-.evidence/
+# Runtime data populated by adapter scripts, consumed by agents.
+# .evidence/knowledge/ and .evidence/analysis/ are runtime artifacts.
+# .evidence/wiki/ is git-tracked (preserves explored/pinned review state).
+.evidence/knowledge/
+.evidence/analysis/
+.evidence/trends/
+.evidence/task-logs/
+
+# Raw intake (Obsidian Web Clipper drops). Content is ephemeral;
+# fetch-clippings.ts processes and moves to processed/.
+# Only .gitkeep files are tracked for directory structure.
+raw/**
+!raw/
+!raw/**/
+!raw/**/.gitkeep
 
 # Script dependencies
 assets/scripts/node_modules/
