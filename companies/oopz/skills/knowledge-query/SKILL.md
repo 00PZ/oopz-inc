@@ -73,6 +73,16 @@ Field notes:
 
 Every query page body follows this structure in order:
 
+**(0) Discovery**
+
+Before synthesizing an answer, Librarian MUST discover which wiki pages are relevant:
+
+- Call [[qmd-search]] with the niche-scoped query: `qmd query "<question>" -c <niche> --files --min-score 0.3 -n 15`
+- Read the top-K returned pages (typically 10-15). Do NOT read the entire wiki.
+- If qmd returns zero results (fresh vault, index not yet initialized), fall back to reading `index.md` directly and selecting the most relevant pages manually.
+
+Discovery is always scoped to a single niche via `-c <niche>`. Never query across niches.
+
 **(a) TLDR**
 
 2-3 sentences. No wikilinks. No markdown formatting. Plain prose answer to the question.
@@ -112,6 +122,16 @@ Confidence for the query page is set to the lowest confidence of any cited page:
 
 If no wiki pages exist for the niche yet, return: "Wiki not yet compiled for this niche. Run [[knowledge-compiler]] first."
 
+Citations MUST point to the original wiki pages, not to qmd score snippets. qmd is a discovery tool that surfaces which pages to read. The actual citations in the answer body come from reading those pages in full, not from qmd's result excerpts.
+
+## Discovery Invariants
+
+- Discovery is scoped to a single niche via `-c <niche>` on every qmd call. Never cross-niche.
+- qmd MCP server (preferred) or CLI fallback (via Bash tool) chosen per [[.paperclip.yaml]] config. Both paths pass `-c <niche>`.
+- If discovery returns a page with `explored: false`, the unreviewed-source annotation rule (see Body Structure above) applies. qmd scores do not change the explored flag.
+- Min-score threshold defaults to 0.3. Adjust per use case (lower for broad recall, higher for precision).
+- If the qmd index is stale or uninitialized, fall back to reading `index.md` directly. Log the fallback in the query page's Open Gaps section.
+
 ## Unreviewed-source Annotation
 
 If any cited page has `explored: false`, the answer MUST include the "Unreviewed Sources" section (see Body Structure above) with this exact phrase: "Treat with reduced confidence."
@@ -132,7 +152,7 @@ Every query creates a new file. No query is answered without filing.
 
 ## Owned By
 
-[[librarian]] agent. Consumers (Researcher, Writer, Strategist, Analyst) delegate to Librarian. They do not load this skill directly. The Librarian is the only agent with write access to `.evidence/wiki/`.
+[[librarian]] agent. Consumers (Researcher, Writer, Strategist, Analyst) delegate to Librarian. They do not load this skill directly. The Librarian is the only agent with write access to `.evidence/wiki/`. Librarian uses [[qmd-search]] for discovery before synthesis.
 
 ## Invariant
 

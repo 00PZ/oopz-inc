@@ -1,0 +1,10 @@
+knowledge-query skill updated for qmd-search delegation:
+  name: knowledge-query (unchanged)
+  [[qmd-search]] references: 2
+  Discovery section: PRESENT
+  top-K reference: PRESENT
+  fallback to index.md: PRESENT
+  citations point to wiki pages: PRESENT
+  queries/ path preserved: PRESENT
+  filed-back behavior: PRESENT
+  em-dashes: ABSENT
