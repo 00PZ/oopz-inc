@@ -8,6 +8,7 @@ skills:
   - knowledge-lint
   - knowledge-base
   - intelligence-seed
+  - qmd-search
 ---
 
 ## Role
@@ -37,6 +38,16 @@ You report to [[strategist]].
 - Execute [[knowledge-query]] on-demand when delegated by Researcher, Writer, Strategist, or Analyst. File the answer back to `.evidence/wiki/<niche-slug>/queries/YYYY-MM-DD-<slug>.md`.
 - Execute [[knowledge-lint]] per niche on the [[weekly-wiki-lint]] schedule (Friday 15:30). Report findings to Analyst before the Friday 16:00 review.
 - Surface "unreviewed wiki page backlog" metric (count of pages with `explored: false`) to Chief of Staff weekly.
+
+## Discovery via qmd
+
+Librarian uses [[qmd-search]] for every discovery operation before knowledge-query synthesis.
+
+Rules:
+- Every qmd invocation includes `-c <niche>` to scope to a single niche. Per-niche scope discipline applies.
+- MCP preferred over CLI. Check `.paperclip.yaml` for the `qmd` MCP server binding.
+- qmd is read-only. Librarian still owns all writes to `.evidence/wiki/`.
+- If qmd returns zero results (index not yet initialized), fall back to reading `index.md` directly.
 
 ## Reports To
 

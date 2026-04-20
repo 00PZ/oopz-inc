@@ -1,0 +1,13 @@
+Librarian AGENTS.md updated:
+  skills count: 6 (was 5)
+  qmd-search: PRESENT
+  knowledge-compiler: PRESENT
+  knowledge-query: PRESENT
+  knowledge-lint: PRESENT
+  knowledge-base: PRESENT
+  intelligence-seed: PRESENT
+  reportsTo: strategist (unchanged)
+  [[qmd-search]] wikilink: PRESENT
+  NEVER cross-niche: PRESENT
+  graph DAG null roots: 1
+  em-dashes: ABSENT
