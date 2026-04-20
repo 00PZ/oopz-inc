@@ -1,223 +1,357 @@
 # Oopz
 
-A Paperclip agent company that runs specialist projects. First project: **Shoshin** (multi-niche short-form social media content engine). First niche in Shoshin: World Mobile.
+A Paperclip agent company that runs specialist projects. First project: **Shoshin** (multi-niche short-form social media content engine). First niche: World Mobile.
 
 ---
 
-## The Hierarchy (Read This First)
-
-Oopz operates on three tiers:
+## System Overview
 
 ```
-Oopz (company)
-  └── Shoshin (project)
-        └── world-mobile (niche)
+                    ┌──────────────────────────────────────────────────────┐
+                    │                    OOPZ (Company)                    │
+                    │                                                      │
+                    │   9 agents  |  3 teams  |  16+ skills  |  6+ tasks  │
+                    │                                                      │
+                    │   ┌────────────────────────────────────────────┐     │
+                    │   │           SHOSHIN (Project)                │     │
+                    │   │                                            │     │
+                    │   │   niches: [world-mobile, ...]              │     │
+                    │   │   platforms: X, TikTok, Instagram, Threads │     │
+                    │   │   posture: third-party independent creator │     │
+                    │   └────────────────────────────────────────────┘     │
+                    │                                                      │
+                    │   ┌────────────────────────────────────────────┐     │
+                    │   │           (FUTURE PROJECT)                 │     │
+                    │   │   niches: [...]                            │     │
+                    │   └────────────────────────────────────────────┘     │
+                    └──────────────────────────────────────────────────────┘
 ```
 
-- **Oopz** is the company. Defined in `COMPANY.md`. It owns the 8 agents, 3 teams, company-level tasks, and all shared skills. Future projects are siblings of Shoshin under `projects/`.
-- **Shoshin** is a project inside Oopz. Defined in `projects/shoshin/PROJECT.md`. It declares which niches it operates on via frontmatter:
-
-  ```yaml
-  niches:
-    - world-mobile
-  ```
-
-- **World Mobile** is a niche. A niche is NOT its own PROJECT.md. A niche is a combination of: (1) a `skills/<slug>-niche-profile/SKILL.md` file, (2) a schema in the project's DB, and (3) a `.evidence/knowledge/<niche-slug>/` directory. Niches are declared as relations in a project's `niches:` list.
-
-Key distinction: `COMPANY.md` is the company. `PROJECT.md` is the project. The niche is a skill + DB schema + knowledge-base directory, not a separate structural entity. Teams (Discovery, Production, Operations) live at the company level and serve any Oopz project.
+**Three tiers**: Company owns agents/teams/skills. Projects declare niches and scope work. Niches are the knowledge boundary (one Postgres schema, one knowledge directory, one wiki per niche). Adding a niche = additive. Adding a project = additive. Neither requires agent changes.
 
 ---
 
-## Why "Oopz" and What's "Shoshin"?
+## Agent Graph (Org Chart)
 
-**Oopz** is the company name.
+```
+                         ┌────────────────────┐
+                         │  chief-of-staff    │  reportsTo: null
+                         │  (graph root/CEO)  │
+                         └──┬───────┬───────┬─┘
+                            │       │       │
+           ┌────────────────┘       │       └─────────────────┐
+           ▼                        ▼                         ▼
+   ┌───────────────┐        ┌─────────────┐          ┌─────────────┐
+   │  Strategist   │        │   Editor    │          │  Scheduler  │
+   │  (Discovery   │        │ (Production │          │ (Operations │
+   │   team lead)  │        │  team lead) │          │  team lead) │
+   └─┬───┬───┬────┘        └──────┬──────┘          └──────┬──────┘
+     │   │   │                     │                        │
+     ▼   ▼   ▼                     ▼                        ▼
+  ┌────┐┌────────┐┌─────────┐  ┌───────┐              ┌─────────┐
+  │Scou││Researc-││Librarian│  │Writer │              │ Analyst │
+  │  t ││  her   ││  (wiki) │  │       │              │         │
+  └────┘└────────┘└─────────┘  └───────┘              └─────────┘
 
-**Shoshin** (初心, "beginner's mind" in Japanese) is the content-engine project. The name reflects a deliberate posture: month one of any agent-driven content system is humbling. As Eric Osiu observed about his OpenClaw marketing team, "month 1 was terrible" before the skill graph started compounding. Shoshin embraces that. Start with beginner's mind, measure everything, iterate weekly, let the data compound the skills. No illusions about instant quality.
+  DISCOVERY TEAM          PRODUCTION TEAM          OPERATIONS TEAM
+  strategist              editor                   scheduler
+  scout                   writer                   analyst
+  researcher
+  librarian
+```
+
+**Rules**: exactly one `reportsTo: null` (chief-of-staff). Every other agent points to a manager. Paperclip uses this DAG for delegation and escalation. All agents are **credential-free** (no DB access, no API keys). They read and write markdown only.
 
 ---
 
-## What is a Paperclip Company? (First-Time User Primer)
-
-A Paperclip company is a structured collection of AI agents, organized by the [Agent Companies Specification](https://agentcompanies.io/specification). The key files:
-
-| File | Purpose |
-|------|---------|
-| `COMPANY.md` | Company identity, goals, metadata. The root document. |
-| `agents/<slug>/AGENTS.md` | One per agent. Defines role, skills, `reportsTo` chain. |
-| `teams/<slug>/TEAM.md` | Groups agents into functional teams with a manager. |
-| `projects/<slug>/PROJECT.md` | A project the company operates. Has its own tasks and `niches:` list. |
-| `tasks/<slug>/TASK.md` | Scheduled or triggered work. Company-level or project-scoped. |
-| `skills/<slug>/SKILL.md` | Reusable knowledge modules agents load at runtime. |
-| `.paperclip.yaml` | Runtime configuration (env overrides, adapter settings). |
-
-**The graph rule**: exactly one agent has `reportsTo: null` (the CEO / graph root). Every other agent has a `reportsTo` pointing to another agent's slug. This creates a directed acyclic graph that Paperclip uses for delegation and escalation.
-
-A Paperclip company can contain multiple projects under `projects/`. Each project has its own tasks and frontmatter (including the `niches:` relation list that Oopz uses). Today, Oopz has one project (Shoshin). Adding a second project means adding `projects/<new-slug>/PROJECT.md` with its own niches, tasks, and scope. The 8 agents and 3 teams serve all projects.
-
----
-
-## How Shoshin Works (The Workflow)
+## Content Production Workflow
 
 ```
-Scout ──► Strategist ──► Researcher ──► Writer ──► Editor ──► Scheduler ──► [HUMAN APPROVES] ──► Analyst
-  ▲                                                                                                  │
-  └──────────────────────── skill updates (hooks-library, niche-profile) ◄───────────────────────────┘
+Scout ──► Strategist ──► Researcher ──► Writer ──► Editor ──► Scheduler ──► [HUMAN] ──► Analyst
+  ▲                          │                        ▲                                     │
+  │                          │ delegates              │ ai-tells                            │
+  │                          ▼                        │ scan                                │
+  │                     ┌──────────┐                  │                                    │
+  │                     │Librarian │                  │                                    │
+  │                     │(wiki     │                  │                                    │
+  │                     │ query)   │                  │                                    │
+  │                     └──────────┘                  │                                    │
+  │                                                   │                                    │
+  └────────── skill updates (hooks-library, niche-profile) ◄──────────────────────────────┘
 ```
 
-1. **Scout** scans platforms twice daily (06:00 and 18:00 Europe/Amsterdam) for trend signals across all Shoshin niches.
-2. **Strategist** converts trend signals into a weekly content queue. Every Monday, iterates over the niches in `projects/shoshin/PROJECT.md` and selects 3-5 topics per niche.
-3. **Researcher** builds a factual dossier for each topic, drawing primarily from `.evidence/knowledge/<niche-slug>/`.
-4. **Writer** produces platform-native drafts (rethinking, not reformatting) for X, TikTok, Instagram, and Threads.
-5. **Editor** gates every draft for voice, compliance, hook quality, and platform-nativeness.
-6. **Scheduler** queues approved drafts with proposed publish times. **Never auto-publishes.**
-7. **Human** reviews the queue and approves or rejects each post. This gate is non-negotiable for crypto-adjacent content.
-8. **Analyst** measures performance weekly, proposes concrete diffs to `hooks-library` and niche-profile skills. Human approves before applying.
+1. **Scout** scans platforms 2x/day (06:00, 18:00) for trend signals across all niches.
+2. **Strategist** converts signals into a weekly content queue (Monday 10:00, 3-5 topics/niche).
+3. **Researcher** builds factual dossiers, delegating to Librarian for wiki-backed synthesis.
+4. **Writer** produces platform-native drafts (rethinking, not reformatting) for 4 platforms.
+5. **Editor** gates every draft: voice, compliance, hook quality, ai-tells scan, platform-nativeness.
+6. **Scheduler** queues approved drafts. **Never auto-publishes.**
+7. **Human** reviews and approves/rejects. Non-negotiable for crypto-adjacent content.
+8. **Analyst** measures weekly, proposes skill diffs. Human approves before applying.
 
 The loop compounds: Analyst insights refine skills, which improve future content.
 
 ---
 
-## Data Architecture (The Per-Project Single Brain)
+## Data Flow (Source to Agent)
 
 ```
-                  EXTERNAL SOURCES                    SHOSHIN-KB (Postgres)
-              ┌─────────────────────┐              ┌──────────────────────┐
-              │  tweet-curator-pg   │──┐           │  public schema       │
-              │  (CURATOR_DB_URL)   │  │  fetch    │    niches            │
-              └─────────────────────┘  ├──scripts──►    source_types      │
-              ┌─────────────────────┐  │           │    schema_migrations │
-              │  Web (RSS, blogs)   │──┘           │                      │
-              └─────────────────────┘              │  world_mobile schema │
-                                                   │    knowledge_items   │
-                                                   └──────────┬───────────┘
-                                                              │
-                                                   kb-to-markdown.ts
-                                                              │
-                                                              ▼
-                                                   .evidence/knowledge/
-                                                     world-mobile/
-                                                       x-posts/
-                                                       web-article/
-                                                              │
-                                                              ▼
-                                                        AGENTS READ
-                                                       (markdown only)
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ EXTERNAL SOURCES (Trigger.dev scraping jobs, self-hosted)                    │
+│                                                                             │
+│   tweet-curator-pg          Web scraper           Obsidian Web Clipper      │
+│   (X accounts for niche)    (blogs, news)         (human-curated clips)     │
+│        │                         │                        │                 │
+└────────┼─────────────────────────┼────────────────────────┼─────────────────┘
+         │ fetch-x-posts.ts        │ fetch-web-article.ts   │ fetch-clippings.ts
+         │ (reads curator DB)      │ (scrapes + markdownize)│ (parses frontmatter)
+         ▼                         ▼                        ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ SHOSHIN-KB (Postgres, per-project DB)                                       │
+│                                                                             │
+│   public schema:  niches | source_types | schema_migrations                 │
+│   world_mobile schema:  knowledge_items                                     │
+│       source_type: x-posts | web-article | clippings                        │
+│       engagement_signals: {likes, retweets, ...}                            │
+│       body_text: fair-use summary                                           │
+│       content_hash: SHA-256 (dedup)                                         │
+└──────────────────────────────────┬──────────────────────────────────────────┘
+                                   │ kb-to-markdown.ts (projects DB rows to files)
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ .evidence/knowledge/<niche>/<source-type>/*.md  (Zod-validated frontmatter) │
+│                                                                             │
+│   world-mobile/x-posts/2026-04-15-tweet-abc.md                              │
+│   world-mobile/web-article/2026-04-15-blog-slug.md                          │
+│   world-mobile/clippings/2026-04-15-clip-hash.md                            │
+└──────────────────┬──────────────────────────────────────────────────────────┘
+                   │ Librarian agent reads (nightly 02:00)
+                   ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ .evidence/wiki/<niche>/  (compiled, cross-linked, validation-gated)         │
+│                                                                             │
+│   index.md         (master index with one-line TLDRs)                       │
+│   concepts/*.md    (ideas, patterns, principles)                            │
+│   entities/*.md    (people, orgs, tools, products)                          │
+│   topics/*.md      (synthesized briefings)                                  │
+│   queries/*.md     (filed-back Q&A, compounding loop)                       │
+│   _lint/*.md       (weekly quality reports)                                 │
+│                                                                             │
+│   Frontmatter: explored(false/true) | confidence | counter_arguments |      │
+│                data_gaps | cross_links | pinned                             │
+└──────────────────┬──────────────────────────────────────────────────────────┘
+                   │ knowledge-query delegation
+                   ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CONSUMER AGENTS                                                             │
+│   Researcher | Writer | Strategist | Analyst (via Librarian delegation)     │
+│   Scout reads .evidence/knowledge/ directly (raw items, not wiki)           │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Why agents never hold DB credentials**: isolation. Scripts in `assets/scripts/` are the only code that touches the database. They run outside Paperclip (user shell, cron, Trigger.dev). Scripts write to the project DB, then project markdown via `kb-to-markdown.ts`. Agents consume `.evidence/knowledge/<niche-slug>/` and never see a connection string.
-
-`shoshin-kb` is the Shoshin project's database. Future Oopz projects get their own DBs (e.g. `oracle-kb`, `arrow-kb`). Each DB uses schema-per-niche isolation.
+**Invariants**:
+- Scripts hold DB credentials. Agents never do.
+- Scripts never call LLMs. Agents do (via Paperclip model binding).
+- Source DBs (tweet-curator-pg) are read-only from Oopz's perspective. One-way flow.
+- `shoshin-kb` is Oopz's copy, not a cache. It has its own shape.
+- The markdown projection (`.evidence/knowledge/`) is the agent contract.
 
 ---
 
-## DB Strategy Summary
+## Knowledge Layer (KBL + BF)
 
-Full details in `references/db-strategy.md`.
+```
+┌─────────────── KBL: Knowledge Base Layer (DYNAMIC) ─────────────────────────┐
+│                                                                              │
+│  RAW          raw/clippings/*.md  (Obsidian clipper, gitignored)             │
+│  NORMALIZED   shoshin-kb Postgres (schema-per-niche)                         │
+│  PROJECTED    .evidence/knowledge/<niche>/<source-type>/*.md                 │
+│  COMPILED     .evidence/wiki/<niche>/  (Librarian, nightly 02:00)            │
+│  QUERIED      .evidence/wiki/<niche>/queries/  (filed-back, compounding)     │
+│                                                                              │
+│  Quality controls:                                                           │
+│    - explored: false (soft flag, human flips to true)                        │
+│    - confidence: uncertain | low | medium | high                             │
+│    - counter_arguments: mandatory per concept/topic page                     │
+│    - data_gaps: mandatory per concept/topic page                             │
+│    - cross_links: bidirectional wikilinks                                    │
+│    - minimum evidence: 2+ sources before a page is created                   │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
 
-Model: per-project DB, schema-per-niche within it, `public` schema for cross-cutting tables (`niches`, `source_types`, `schema_migrations`). SQL templates live in `assets/sql/`.
+┌─────────────── BF: Brand Foundation (STATIC, human-only) ────────────────────┐
+│                                                                              │
+│  skills/brand-voice-system/     (7 voice axes, per-platform shifts)          │
+│  skills/compliance-rules/       (crypto/finance compliance checklist)         │
+│  skills/<niche>-niche-profile/  (niche-specific voice + audience override)   │
+│  skills/ai-tells/               (banned AI-slop patterns, Editor scans)      │
+│                                                                              │
+│  Frontmatter: static: true | editable_by: human                             │
+│  Agents READ before producing. Agents NEVER write.                           │
+│  Only human commits modify these files.                                      │
+│  Analyst proposes diffs via intelligence-seed; human approves and applies.   │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
 
-| Project | DB Name | Active Niches / Schemas |
-|---------|---------|------------------------|
-| Shoshin | `shoshin-kb` | `world_mobile` |
-| (future) | `<project-slug>-kb` | per project's `niches:` list |
+---
 
-Naming: niche slug `world-mobile` maps to Postgres schema `world_mobile` (hyphens become underscores). Role naming: `<project>_<niche>_rw` (e.g. `shoshin_world_mobile_rw`). Agents have no DB role at all.
+## Write Boundaries
 
-Migration protocol: numbered files in `assets/sql/` applied via `psql -f`. `001_init.sql` creates cross-cutting tables. `002_niche_template.sql.tmpl` is applied once per niche with `envsubst`.
+```
+                      │ .evidence/ │ .evidence/ │ .evidence/ │ skills/ │ raw/    │ DB      │
+                      │ knowledge/ │ analysis/  │ wiki/      │         │         │         │
+──────────────────────┼────────────┼────────────┼────────────┼─────────┼─────────┼─────────┤
+Scripts               │   W (via   │     -      │     -      │    -    │  R+move │  R+W    │
+(assets/scripts/)     │ kb-to-md)  │            │            │         │         │         │
+Librarian agent       │     R      │     -      │    R+W     │    R    │    -    │    -    │
+Analyst agent         │     R      │    R+W     │     R      │    R    │    -    │    -    │
+All other agents      │     R      │     R      │     R      │    R    │    -    │    -    │
+Humans                │    R+W     │    R+W     │  R + flags │   R+W   │   R+W   │   R+W   │
+
+R = read, W = write, flags = only explored/pinned fields
+```
+
+---
+
+## Daily + Weekly Cadence
+
+```
+DAILY (Europe/Amsterdam)
+━━━━━━━━━━━━━━━━━━━━━━━━
+02:00   nightly-wiki-compile     Librarian    compile .evidence/wiki/ per niche
+06:00   trend-scan               Scout        scan platforms for signals
+07:00   clippings-ingest         Librarian    raw/clippings/ → DB → markdown
+08:00   morning-brief            CoS          daily status overview
+18:00   trend-scan-evening       Scout        second daily scan
+
+MONDAY
+━━━━━━
+10:00   weekly-content-sprint    Strategist   3-5 topics per niche queued
+
+FRIDAY (the compounding ritual)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+15:30   weekly-wiki-lint         Librarian    contradictions, orphans, duplicates
+16:00   weekly-analyst-review    Analyst      top/bottom posts, patterns (consumes lint)
+17:30   intelligence-seed        Analyst      proposed skill diffs per niche
+after   human reviews + approves diffs
+after   human flips explored flags on wiki pages reviewed
+
+COMPOUNDING LOOP
+━━━━━━━━━━━━━━━━
+clip during day → 07:00 ingest → 02:00 compile → agents read richer wiki
+      ▲                                                         │
+      └── human reviews weekly lint + flips explored flags ─────┘
+```
+
+Week 1 content is raw. Week 4 reflects 3 rounds of data-driven skill refinement. The graph gets smarter because the skills get better, not because the agents change.
+
+---
+
+## Skill Topology
+
+```
+BRAND FOUNDATION (static: true, human-only edits)
+  brand-voice-system          7 voice axes, per-platform DNA shifts
+  compliance-rules            crypto/finance/DePIN compliance checklist
+  world-mobile-niche-profile  niche-specific voice, audience, knowledge sources
+  ai-tells                    banned AI-slop patterns (Editor scans drafts)
+
+CONTENT ENGINE (dynamic, iterated via intelligence-seed + Analyst)
+  audience-profiles           audience segments per niche
+  hooks-library               20+ hook patterns by trigger, iterated weekly
+  content-calendar            per-platform cadence caps, best-time-to-post
+  content-types               enumerated types with platform fit matrix
+  repurpose-engine            1-idea-to-4-platforms (rethink, never reformat)
+
+PLATFORM PLAYBOOKS (externally referenced, pinned SHA)
+  x-playbook                  from msitarzewski/agency-agents
+  tiktok-playbook             from msitarzewski/agency-agents
+  instagram-playbook          from msitarzewski/agency-agents
+  threads-playbook            internal
+
+DATA LAYER (contracts + adapters)
+  knowledge-base              foundational contract (Zod schema, path convention)
+  knowledge-compiler          per-niche wiki compilation contract (Librarian)
+  knowledge-query             query + filed-back answer contract (Librarian)
+  knowledge-lint              quality sweep contract (Librarian)
+  x-posts-adapter             X/Twitter posts intake
+  web-article-adapter         blog/news scrape + markdownize intake
+  clippings-adapter           Obsidian Web Clipper intake
+  intelligence-seed           source-agnostic mining templates (Analyst)
+```
 
 ---
 
 ## Adapter Catalog
 
-| Adapter Slug | Status | What It Ingests | Required Env | SKILL Slug | Script Path |
-|-------------|--------|-----------------|-------------|------------|-------------|
-| `x-posts` | Day 1, wired | Curated X/Twitter posts from tweet-curator-pg | `DATABASE_URL`, `CURATOR_DATABASE_URL` | `x-posts-adapter` | `assets/scripts/fetch-x-posts.ts` |
-| `web-article` | Day 1, wired | Blog posts, news via RSS/scrape | `DATABASE_URL` | `web-article-adapter` | `assets/scripts/fetch-web-article.ts` |
-| `youtube-transcripts` | Future | YouTube video transcripts | TBD | TBD | TBD |
-| `manual-notes` | Future | Hand-written notes, observations | TBD | TBD | TBD |
-| `rss` | Future | Generic RSS feed items | TBD | TBD | TBD |
-| `reddit` | Future | Reddit posts and comments | TBD | TBD | TBD |
+| Adapter | Status | Ingests | Script | Env |
+|---------|--------|---------|--------|-----|
+| `x-posts` | Active | Curated X posts from tweet-curator-pg | `fetch-x-posts.ts` | `DATABASE_URL`, `CURATOR_DATABASE_URL` |
+| `web-article` | Active | Blog posts, news (scrape + markdownize) | `fetch-web-article.ts` | `DATABASE_URL` |
+| `clippings` | Active | Obsidian Web Clipper markdown drops | `fetch-clippings.ts` | `DATABASE_URL` |
+| `youtube-transcripts` | Roadmap | YouTube video transcripts | TBD | TBD |
+| `manual-notes` | Roadmap | Hand-written notes, observations | TBD | TBD |
+| `rss` | Roadmap | Generic RSS feed items | TBD | TBD |
+| `reddit` | Roadmap | Reddit posts and comments | TBD | TBD |
 
-**Adding a new adapter**: copy an existing adapter skill (e.g. `x-posts-adapter`) and its script stub. Swap the source-specific fields. The `knowledge-base` frontmatter contract stays the same across all adapters; only `source_type`, `source_identifier`, and `engagement_signals` keys change per adapter. Register the new source type in `public.source_types`.
-
----
-
-## Org Chart
-
-| Slug | Name | Title | Reports To | Team | Core Skills | DB Access? |
-|------|------|-------|-----------|------|-------------|-----------|
-| `chief-of-staff` | Chief of Staff | Chief of Staff (CEO) | `null` (graph root) | (all) | compliance-rules, brand-voice-system, content-calendar | NO |
-| `strategist` | Strategist | Content Strategist & Discovery Team Lead | chief-of-staff | Discovery | repurpose-engine, audience-profiles, content-calendar, brand-voice-system | NO |
-| `scout` | Scout | Trend Intelligence Specialist | strategist | Discovery | content-calendar | NO |
-| `researcher` | Researcher | Topic Research Specialist | strategist | Discovery | compliance-rules | NO |
-| `writer` | Writer | Platform-Native Content Writer | editor | Production | x-playbook, tiktok-playbook, instagram-playbook, threads-playbook, hooks-library, repurpose-engine, brand-voice-system, compliance-rules | NO |
-| `editor` | Editor | Content Editor & Production Team Lead | chief-of-staff | Production | brand-voice-system, compliance-rules, hooks-library, x-playbook, tiktok-playbook, instagram-playbook, threads-playbook | NO |
-| `scheduler` | Scheduler | Content Scheduler & Operations Team Lead | chief-of-staff | Operations | content-calendar, content-types | NO |
-| `analyst` | Analyst | Performance Analyst | scheduler | Operations | hooks-library, content-types, audience-profiles, compliance-rules, brand-voice-system | NO |
-
-Chief of Staff is the Oopz-level CEO. It oversees all projects (today Shoshin, tomorrow any new project). It is not Shoshin-specific.
-
-All agents are credential-free. They read markdown from `.evidence/` directories. No agent holds a database connection string or API secret.
+**Adding a new adapter**: copy an existing adapter skill + script stub. Swap source-specific fields. The `knowledge-base` contract stays the same; only `source_type`, `source_identifier`, and `engagement_signals` keys change. Register in `public.source_types`.
 
 ---
 
-## Skills Inventory
+## DB Strategy
 
-### Content Engine Skills (Custom)
+```
+Per-project DB, schema-per-niche isolation:
 
-| Skill Slug | Purpose |
-|-----------|---------|
-| `brand-voice-system` | Universal voice framework (7 axes, 1-10 scale). Niche profiles override. |
-| `audience-profiles` | Two segments: depin-natives, connectivity-curious. Niche profiles extend. |
-| `hooks-library` | 20+ hook patterns by psychological trigger. Iterated weekly via Analyst. |
-| `content-calendar` | Per-platform cadence caps, weekly rhythm, best-time-to-post windows. |
-| `content-types` | Enumerated content types with platform fit matrix. |
-| `repurpose-engine` | 1-idea-to-4-platforms chain. Rethink, never reformat. |
-| `compliance-rules` | Mandatory compliance checklist for regulated topics (crypto, finance, DePIN). |
-| `world-mobile-niche-profile` | Niche overlay for World Mobile: identity, audience, compliance, knowledge sources. |
+  shoshin-kb (Postgres)
+    ├── public (cross-cutting)
+    │     niches | source_types | schema_migrations
+    └── world_mobile (niche schema)
+          knowledge_items (UNIQUE on source_type + source_identifier)
 
-### Platform Playbooks (Externally Referenced)
+  (future) arrow-kb
+    ├── public
+    └── defi_lending
+```
 
-| Skill Slug | Upstream Repo | Commit SHA |
-|-----------|--------------|------------|
-| `x-playbook` | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | `783f6a72bfd7f3135700ac273c619d92821b419a` |
-| `tiktok-playbook` | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | `783f6a72bfd7f3135700ac273c619d92821b419a` |
-| `instagram-playbook` | [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | `783f6a72bfd7f3135700ac273c619d92821b419a` |
-| `threads-playbook` | (no external source) | N/A |
-
-### Data-Layer Skills
-
-| Skill Slug | Purpose |
-|-----------|---------|
-| `knowledge-base` | Foundational contract: normalized markdown format, Zod frontmatter schema, file-path convention. All adapters output to this spec; all agents read from it. |
-| `x-posts-adapter` | Ingests curated X/Twitter posts from tweet-curator-pg into a niche's knowledge base. |
-| `web-article-adapter` | Ingests blog posts, news articles, long-form web content into a niche's knowledge base. |
-| `intelligence-seed` | Source-agnostic templates for mining a niche's knowledge base. Produces proposed diffs for hooks, voice, audience, baselines. Never cross-pollinates across niches. |
+Naming: niche slug `world-mobile` maps to schema `world_mobile`. Role: `shoshin_world_mobile_rw`. Agents have **no DB role**. Full details in `references/db-strategy.md`.
 
 ---
 
-## Starter Tasks
+## How to Add a Niche
 
-| Task Name | Scope | Assignee | Cadence | Iterates Over Niches? |
-|-----------|-------|----------|---------|----------------------|
-| `morning-brief` | Company | chief-of-staff | Daily 08:00 | No (covers all projects) |
-| `trend-scan` (morning) | Company | scout | Daily 06:00 | Yes (Shoshin niches) |
-| `trend-scan-evening` | Company | scout | Daily 18:00 | Yes (Shoshin niches) |
-| `weekly-analyst-review` | Company | analyst | Friday 16:00 | Yes (all niches, all projects) |
-| `weekly-content-sprint` | Project (Shoshin) | strategist | Monday 10:00 | Yes (Shoshin niches) |
-| `intelligence-seed` | Project (Shoshin) | analyst | Friday 17:30 | Yes (Shoshin niches) |
+```bash
+# 1. SQL: create schema
+NICHE_SLUG=defi-lending NICHE_SCHEMA=defi_lending \
+  envsubst < assets/sql/002_niche_template.sql.tmpl | psql shoshin-kb
 
-All times are Europe/Amsterdam.
+# 2. Skill: create niche profile
+cp skills/world-mobile-niche-profile skills/defi-lending-niche-profile
+# edit: identity, audience, compliance, knowledge_sources
+
+# 3. Project: append to niches list
+# projects/shoshin/PROJECT.md → niches: [world-mobile, defi-lending]
+
+# 4. Adapters: run fetch scripts for new niche
+bun assets/scripts/fetch-x-posts.ts --project-slug shoshin --niche-slug defi-lending
+bun assets/scripts/fetch-web-article.ts --project-slug shoshin --niche-slug defi-lending
+bun assets/scripts/kb-to-markdown.ts --project-slug shoshin --niche-slug defi-lending
+
+# 5. Seed: bootstrap hooks, voice, audience, baselines
+# trigger intelligence-seed task for defi-lending
+
+# 6. Done. Monday's weekly-content-sprint auto-discovers the new niche.
+```
+
+Niches are **additive**. Agents and teams never change when you add one.
 
 ---
 
-## Project Model (How to Add a New Project to Oopz)
-
-Adding a new project (a sibling of Shoshin) under Oopz:
-
-**(a)** Create `projects/<new-project>/PROJECT.md` with its own slug, description, owner, and `niches:` list. Example:
+## How to Add a Project
 
 ```yaml
+# projects/arrow/PROJECT.md
 ---
 name: Arrow
 slug: arrow
@@ -228,137 +362,184 @@ niches:
 ---
 ```
 
-**(b)** Create project-scoped tasks under `projects/<new-project>/tasks/`. Each task references the project via `project: <slug>` in frontmatter.
-
-**(c)** If the new project needs its own knowledge base: create a `<new-project>-kb` Postgres DB, run `assets/sql/001_init.sql` against it, then apply `002_niche_template.sql.tmpl` per niche in its `niches:` list.
-
-**(d)** The existing 8 agents and 3 company-level teams automatically become available to the new project. No agent or team changes needed.
-
-**(e)** Decide: does this project share any niches with Shoshin? If yes, add matching slugs to both projects' `niches:` lists. Each project still has its own DB; shared niches mean both projects have a schema for that niche in their respective DBs.
-
----
-
-## Niche Model (How to Add a New Niche to Shoshin)
-
-Adding a new niche (e.g. `defi-lending`) to the Shoshin project:
-
-**(a)** **SQL**: Apply `assets/sql/002_niche_template.sql.tmpl` with the new niche variables against `shoshin-kb`:
-
-```bash
-NICHE_SLUG=defi-lending NICHE_SCHEMA=defi_lending \
-  envsubst < assets/sql/002_niche_template.sql.tmpl | psql shoshin-kb
-```
-
-**(b)** **Skill**: Create `skills/defi-lending-niche-profile/SKILL.md` copied from `world-mobile-niche-profile`. Update: niche identity, audience segments, compliance posture, topic allow/deny lists, and `knowledge_sources:` selectors (author lists, RSS feeds, keyword filters).
-
-**(c)** **Project**: Append the new niche slug to `projects/shoshin/PROJECT.md`'s `niches:` list:
-
-```yaml
-niches:
-  - world-mobile
-  - defi-lending
-```
-
-**(d)** **Knowledge base**: Run the adapter scripts for the new niche:
-
-```bash
-bun assets/scripts/fetch-x-posts.ts --project-slug shoshin --niche-slug defi-lending
-bun assets/scripts/fetch-web-article.ts --project-slug shoshin --niche-slug defi-lending
-bun assets/scripts/kb-to-markdown.ts --project-slug shoshin --niche-slug defi-lending
-```
-
-**(e)** **Seed**: Run the intelligence-seed task out-of-schedule against the new niche to bootstrap hooks, voice calibration, audience patterns, and engagement baselines.
-
-**(f)** **Done.** The 8 agents, 3 company-level teams, platform skills, engine skills, and compliance rules all work unchanged. The next Monday's `weekly-content-sprint` picks up the new niche automatically because Strategist iterates over `project.niches`.
-
-Niches are ADDITIVE, not structural. Agents and teams never change when you add a niche.
+Then: create `arrow-kb` Postgres DB, run init migration, apply niche template, run adapters. The 9 agents and 3 teams serve all projects automatically.
 
 ---
 
 ## Compliance Posture
 
-Shoshin operates as a **third-party independent creator** for the World Mobile niche. Not affiliated with World Mobile Group Ltd. All content must make this posture unambiguous.
+Shoshin = **third-party independent creator** for World Mobile. Not affiliated with World Mobile Group Ltd.
 
-Key rules from `compliance-rules`:
-
-- Use `$WMTX` (user-confirmed current ticker, never `$WMT`)
-- Never auto-publish. Always run the Editor gate, then the human-in-the-loop gate
+- Use `$WMTX` (never `$WMT`)
+- Never auto-publish (human gate mandatory for crypto content)
 - Not-financial-advice boilerplate on every crypto/finance post
 - No price predictions or buy/sell signals
 - Never impersonate World Mobile Group
-- FTC, FCA, and MiCA disclosure templates per platform
-
-The Editor runs a 10-item checklist on every regulated-topic draft before it can reach Scheduler.
+- FTC, FCA, MiCA disclosure templates per platform
+- Editor 10-item checklist on every regulated-topic draft
 
 ---
 
 ## Getting Started
 
-### Import the company
-
 ```bash
-paperclipai company import --from /home/vdm/git/oopz-inc/companies/oopz/
+# Import the company into Paperclip
+paperclipai company import --from /path/to/companies/oopz/
+
+# Create the project DB
+createdb shoshin-kb
+psql shoshin-kb -f assets/sql/001_init.sql
+
+# Add a niche
+NICHE_SLUG=world-mobile NICHE_SCHEMA=world_mobile \
+  envsubst < assets/sql/002_niche_template.sql.tmpl | psql shoshin-kb
+
+# Configure env
+export DATABASE_URL=postgres://...shoshin-kb
+export CURATOR_DATABASE_URL=postgres://...tweet-curator-pg  # read-only
+
+# Run adapters
+bun assets/scripts/fetch-x-posts.ts --project-slug shoshin --niche-slug world-mobile
+bun assets/scripts/fetch-web-article.ts --project-slug shoshin --niche-slug world-mobile
+bun assets/scripts/kb-to-markdown.ts --project-slug shoshin --niche-slug world-mobile
+
+# Seed the knowledge layer
+# trigger intelligence-seed task for world-mobile
+
+# Refine: review proposed diffs, update hooks-library + niche-profile
 ```
-
-### Pre-first-post checklist
-
-1. **Create the Postgres DB**:
-
-   ```bash
-   createdb shoshin-kb
-   ```
-
-2. **Run the init migration**:
-
-   ```bash
-   psql shoshin-kb -f assets/sql/001_init.sql
-   ```
-
-3. **Apply the niche template for world-mobile**:
-
-   ```bash
-   NICHE_SLUG=world-mobile NICHE_SCHEMA=world_mobile \
-     envsubst < assets/sql/002_niche_template.sql.tmpl | psql shoshin-kb
-   ```
-
-4. **Configure script environment variables**:
-   - `DATABASE_URL` pointing to `shoshin-kb` (write role for the active niche)
-   - `CURATOR_DATABASE_URL` pointing to `tweet-curator-pg` (read-only)
-
-5. **Run the adapter scripts**:
-
-   ```bash
-   bun assets/scripts/fetch-x-posts.ts --project-slug shoshin --niche-slug world-mobile
-   bun assets/scripts/fetch-web-article.ts --project-slug shoshin --niche-slug world-mobile
-   bun assets/scripts/kb-to-markdown.ts --project-slug shoshin --niche-slug world-mobile
-   ```
-
-6. **Run intelligence-seed once** for world-mobile: trigger the `intelligence-seed` task out-of-schedule to bootstrap hooks, voice, audience, and baselines from the freshly populated knowledge base.
-
-7. **Refine skills**: review the proposed diffs from the seed run. Update `world-mobile-niche-profile` and `hooks-library` with confirmed insights. These two skills compound weekly, so the seed run gives them their initial signal.
 
 ---
 
-## Iterate-Weekly Ritual
+## File Map
 
-The weekly compounding loop (Ronin's skill-graph principle + Ericosiu's observation that agent systems improve with iteration):
+```
+companies/oopz/
+├── COMPANY.md                    company identity, goals, tags
+├── README.md                     this file
+├── .paperclip.yaml               runtime config
+├── .gitignore                    selective .evidence/ rules
+│
+├── agents/                       9 agents, one AGENTS.md each
+│   ├── chief-of-staff/
+│   ├── strategist/
+│   ├── scout/
+│   ├── researcher/
+│   ├── librarian/                wiki compilation, query, lint
+│   ├── writer/
+│   ├── editor/
+│   ├── scheduler/
+│   └── analyst/
+│
+├── teams/                        3 functional teams
+│   ├── discovery/                strategist + scout + researcher + librarian
+│   ├── production/               editor + writer
+│   └── operations/               scheduler + analyst
+│
+├── projects/
+│   └── shoshin/
+│       ├── PROJECT.md            niches: [world-mobile]
+│       └── tasks/                project-scoped tasks
+│
+├── tasks/                        company-level scheduled tasks
+│   ├── morning-brief/
+│   ├── trend-scan/
+│   ├── trend-scan-evening/
+│   ├── weekly-analyst-review/
+│   ├── clippings-ingest/         daily 07:00
+│   ├── nightly-wiki-compile/     daily 02:00
+│   └── weekly-wiki-lint/         friday 15:30
+│
+├── skills/                       all loadable skills
+│   ├── brand-foundation/         BF posture README (container, not a skill)
+│   ├── brand-voice-system/       static: true
+│   ├── compliance-rules/         static: true
+│   ├── ai-tells/                 static: true
+│   ├── world-mobile-niche-profile/  static: true
+│   ├── knowledge-base/           foundational contract + schema.ts
+│   ├── knowledge-compiler/       wiki compilation contract
+│   ├── knowledge-query/          wiki query contract
+│   ├── knowledge-lint/           wiki lint contract
+│   ├── x-posts-adapter/
+│   ├── web-article-adapter/
+│   ├── clippings-adapter/
+│   ├── intelligence-seed/
+│   ├── hooks-library/
+│   ├── audience-profiles/
+│   ├── content-calendar/
+│   ├── content-types/
+│   ├── repurpose-engine/
+│   ├── x-playbook/
+│   ├── tiktok-playbook/
+│   ├── instagram-playbook/
+│   └── threads-playbook/
+│
+├── assets/
+│   ├── scripts/                  deterministic fetch/transform (bun)
+│   │   ├── fetch-x-posts.ts
+│   │   ├── fetch-web-article.ts
+│   │   ├── fetch-clippings.ts
+│   │   ├── kb-to-markdown.ts
+│   │   └── validate-kb.ts
+│   └── sql/                      numbered migrations
+│       ├── 001_init.sql
+│       ├── 002_niche_template.sql.tmpl
+│       └── 003_clippings_source_type.sql
+│
+├── references/
+│   └── db-strategy.md
+│
+├── raw/                          gitignored intake (Obsidian clips land here)
+│   └── clippings/
+│       └── processed/            audit trail of ingested clips
+│
+└── .evidence/                    runtime data
+    ├── knowledge/                per-niche normalized items (gitignored)
+    │   └── world-mobile/
+    │       ├── x-posts/
+    │       ├── web-article/
+    │       └── clippings/
+    ├── wiki/                     compiled wiki (git-tracked for review state)
+    │   └── world-mobile/
+    │       ├── index.md
+    │       ├── concepts/
+    │       ├── entities/
+    │       ├── topics/
+    │       ├── queries/
+    │       └── _lint/
+    └── analysis/                 intelligence-seed proposed diffs (gitignored)
+        └── world-mobile/
+```
 
-| Time (Friday) | What | Who |
-|--------------|------|-----|
-| 16:00 | `weekly-analyst-review` (company-wide): top/bottom posts, hook patterns, audience heatmap | Analyst |
-| 17:30 | `intelligence-seed` refresh (Shoshin, iterates over all Shoshin niches): proposed diffs for hooks, voice, audience, baselines | Analyst |
-| After seed | Analyst proposes concrete skill-file diffs | Analyst, then human |
-| Human review | Human approves or rejects proposed diffs | Human |
-| Apply | Approved diffs applied to hooks-library, niche-profile skills | Human |
+---
 
-This is how the system compounds. Week 1 content is raw. Week 4 content reflects 3 rounds of data-driven skill refinement. The graph gets smarter because the skills get better, not because the agents change.
+## Trigger.dev Integration
+
+```
+Self-hosted Trigger.dev (existing):
+  tweet-curator-scraper          every 15min    → tweet-curator-pg
+  web-article-scraper            every 60min    → scrape storage
+
+Oopz ingest jobs (Trigger.dev or cron):
+  oopz-fetch-x-posts             every 30min    tweet-curator-pg → shoshin-kb
+  oopz-fetch-web-article         every 60min    web-scrape → shoshin-kb
+  oopz-project-to-markdown       after fetches  shoshin-kb → .evidence/knowledge/
+  oopz-fetch-clippings           daily 07:00    raw/clippings/ → shoshin-kb
+
+Paperclip agent tasks:
+  nightly-wiki-compile           daily 02:00    Librarian compiles wiki
+  weekly-wiki-lint               friday 15:30   Librarian lints wiki
+```
+
+Upstream scrapers own source DBs. Oopz ingest jobs pull from source DBs into `shoshin-kb`. `kb-to-markdown.ts` projects to files. Agents read files. Two separate scheduling concerns: Trigger.dev for scripts, Paperclip for agent tasks.
 
 ---
 
 ## Citations and Credits
 
-- Architecture inspired by: [Ronin's skill graph content engine](https://x.com/DeRonin_/status/2042604279077237170) and [Eric Osiu's OpenClaw marketing team](https://x.com/ericosiu/status/2043083581824827584)
-- External skills: [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) @ commit `783f6a72bfd7f3135700ac273c619d92821b419a`
+- Architecture: [Ronin's skill graph content engine](https://x.com/DeRonin_/status/2042604279077237170), [Eric Osiu's OpenClaw marketing team](https://x.com/ericosiu/status/2043083581824827584)
+- Knowledge layer pattern: [Shann Holmberg's AI Knowledge Layer](https://x.com/shannholmberg/status/2044111115878326444), [LLM Wikid](https://github.com/shannhk/llm-wikid)
+- External skills: [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) @ `783f6a72`
 - Spec: [Agent Companies Specification](https://agentcompanies.io/specification)
 - Runtime: [Paperclip](https://github.com/paperclipai/paperclip)
 
@@ -370,14 +551,31 @@ MIT. See `LICENSE`.
 
 ---
 
-## Out of Scope (Day 1)
+## Known Architectural Gaps
 
-The following are noted for roadmap but not built yet:
+### Knowledge filtering / signal-to-noise
+
+Current pipeline projects **every** row from `shoshin-kb.world_mobile.knowledge_items` into markdown under `.evidence/knowledge/<niche>/<source-type>/*.md`. No quality filter between DB and markdown. No ranking before wiki compilation.
+
+**Implication at scale**: high-volume sources (X posts from many accounts) may flood `.evidence/knowledge/` with low-signal items, bloat the repo, and pollute wiki compilation with noise. At low volume (strict author whitelist, <500 items/month), this is fine. At medium or high volume, a filter pipeline is required.
+
+**Deferred by design**: volume and signal criteria are unknown until the pipeline runs in production. Designing a filter before seeing real data risks optimizing against the wrong metric. Placeholder plan: `.sisyphus/plans/knowledge-filtering.md` captures the open design questions (filter stage location, scoring approach, threshold, what to do with filtered-out items) for later resolution.
+
+**Triggers to build the filter**:
+- `.evidence/knowledge/<niche>/x-posts/` exceeds ~500 files
+- Librarian wiki-compile produces noisy concept pages
+- Agent token costs per run climb past acceptable bounds
+- Analyst notices low-signal items dominating patterns
+
+## Roadmap (not built yet)
 
 - Long-form platforms (LinkedIn, YouTube, Newsletter)
 - Automated publishing (human-in-the-loop is intentional, not a limitation)
-- Multiple Shoshin niches (the architecture supports it; only world-mobile is active Day 1)
-- Additional Oopz projects (siblings to Shoshin under `projects/`)
-- Account warm-up infrastructure
+- Multiple Shoshin niches (architecture supports it; only world-mobile active Day 1)
+- Additional Oopz projects (siblings to Shoshin)
 - `youtube-transcripts`, `manual-notes`, `rss`, `reddit` adapters
-- Automated knowledge-base ingestion schedule (manual/scripted for v0.1)
+- **Knowledge filtering pipeline** (see Known Architectural Gaps above)
+- qmd/BM25 + vector retrieval (at 300+ wiki pages per niche)
+- Cross-project "Oopz brain" (shared knowledge above project level)
+- Obsidian per-project vault integration
+- Autonomy expansion (loosen human-publish gates on low-risk content)

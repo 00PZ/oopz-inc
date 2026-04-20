@@ -12,12 +12,14 @@ goals:
   - Maintain strict compliance for third-party content about regulated topics (crypto, finance)
   - Compound knowledge per-niche: every performance signal refines hooks-library and the niche-profile skills
   - Scale horizontally: add niches to existing projects without refactoring agents; add new projects without duplicating the team layer
+  - Compile per-niche wikis (Librarian) that cross-reference knowledge items with counter-arguments, data gaps, and confidence tags; humans gate review via the explored flag
 tags:
   - multi-project
   - multi-niche
   - social-media
   - content-ops
   - short-form
+  - knowledge-layer
 ---
 
 ## Overview

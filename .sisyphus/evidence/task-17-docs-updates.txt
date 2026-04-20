@@ -1,0 +1,21 @@
+=== COMPANY.md tags ===
+1 matches in 1F:
+
+[file] companies/oopz/COMPANY.md (1):
+    22: - knowledge-layer
+
+=== COMPANY.md goals ===
+1 matches in 1F:
+
+[file] companies/oopz/COMPANY.md (1):
+    15: - Compile per-niche wikis (Librarian) that cross-reference knowledge items with ...
+
+=== PROJECT.md skills ===
+1 matches in 1F:
+
+[file] 32 (1):
+     0: `[[world-mobile-niche-profile]]`, `[[compliance-rules]]`, `[[brand-voice-syst...
+
+=== em-dash check ===
+0 matches for '—'
+PASS

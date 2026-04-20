@@ -29,7 +29,7 @@ Niches are declared via the `niches:` frontmatter list (not duplicated in body).
 
 ## Skill Bindings
 
-Inherited by all tasks under this project: `[[world-mobile-niche-profile]]`, `[[compliance-rules]]`, `[[brand-voice-system]]`, `[[audience-profiles]]`, `[[hooks-library]]`, `[[repurpose-engine]]`, `[[content-calendar]]`, `[[content-types]]`, `[[x-playbook]]`, `[[tiktok-playbook]]`, `[[instagram-playbook]]`, `[[threads-playbook]]`, `[[knowledge-base]]`, `[[x-posts-adapter]]`, `[[web-article-adapter]]`, `[[intelligence-seed]]`.
+Inherited by all tasks under this project: `[[world-mobile-niche-profile]]`, `[[compliance-rules]]`, `[[brand-voice-system]]`, `[[audience-profiles]]`, `[[hooks-library]]`, `[[repurpose-engine]]`, `[[content-calendar]]`, `[[content-types]]`, `[[x-playbook]]`, `[[tiktok-playbook]]`, `[[instagram-playbook]]`, `[[threads-playbook]]`, `[[knowledge-base]]`, `[[x-posts-adapter]]`, `[[web-article-adapter]]`, `[[intelligence-seed]]`, `[[clippings-adapter]]`, `[[knowledge-compiler]]`, `[[knowledge-query]]`, `[[knowledge-lint]]`, `[[ai-tells]]`.
 
 ## Data Scope
 
