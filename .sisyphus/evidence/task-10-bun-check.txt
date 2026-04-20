@@ -1,0 +1,1 @@
+companies/oopz/skills/knowledge-base/schema.ts(12,19): error TS2307: Cannot find module 'zod' or its corresponding type declarations.

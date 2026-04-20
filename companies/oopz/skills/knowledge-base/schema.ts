@@ -14,6 +14,7 @@ import { z } from "zod";
 export const SourceTypeEnum = z.enum([
   "x-posts",
   "web-article",
+  "clippings",
   "youtube-transcripts",
   "manual-notes",
   "rss",

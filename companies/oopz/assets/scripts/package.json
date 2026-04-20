@@ -11,5 +11,8 @@
     "fetch:web-article": "bun run fetch-web-article.ts",
     "project:kb": "bun run kb-to-markdown.ts",
     "validate:kb": "bun run validate-kb.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.12"
   }
 }
