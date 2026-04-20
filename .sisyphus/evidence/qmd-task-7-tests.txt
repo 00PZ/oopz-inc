@@ -1,0 +1,21 @@
+$ cd companies/oopz/assets/scripts && bun test __tests__/sync-qmd-collections.test.ts
+bun test v1.3.10 (30e609e0)
+
+__tests__/sync-qmd-collections.test.ts:
+ 10 pass
+ 0 fail
+ 21 expect() calls
+Ran 10 tests across 1 file. [38.00ms]
+EXIT=0
+
+Tests:
+  extractNiches > parses niches from PROJECT.md
+  extractNiches > returns empty array for missing niches
+  extractContext > extracts Purpose paragraph from niche-profile SKILL.md
+  extractContext > falls back to description when no Purpose heading
+  extractContext > returns default when no Purpose or description
+  parseArgs > parses --project-slug
+  parseArgs > sets dryRun true when --dry-run passed
+  parseArgs > sets skipEmbed true when --skip-embed passed
+  syncCollections > with dryRun true, no qmd commands invoked
+  syncCollections > with dryRun false, qmd commands invoked for missing collection

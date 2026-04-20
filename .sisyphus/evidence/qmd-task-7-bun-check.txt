@@ -1,0 +1,5 @@
+$ cd companies/oopz/assets/scripts && bunx tsc --noEmit
+(exit 0 - no type errors)
+
+Note: `bun check` subcommand not available in Bun 1.3.10.
+Used `bunx tsc --noEmit` (equivalent, uses same tsconfig.json).

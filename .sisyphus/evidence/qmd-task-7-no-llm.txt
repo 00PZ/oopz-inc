@@ -1,0 +1,8 @@
+$ grep -c '@anthropic\|openai\|@ai-sdk' companies/oopz/assets/scripts/sync-qmd-collections.ts
+0
+
+No LLM API imports found. Script uses only:
+  - zod (arg/frontmatter validation)
+  - fs/promises (file I/O)
+  - path (path resolution)
+  - child_process (qmd CLI shell-out)
