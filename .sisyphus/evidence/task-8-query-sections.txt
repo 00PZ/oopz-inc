@@ -1,0 +1,20 @@
+## Purpose
+## Scope Discipline (CRITICAL)
+## Inputs
+## Outputs
+## Query-page Frontmatter
+## Body Structure
+## Citation Policy
+## Unreviewed-source Annotation
+## Filed-back Behavior
+## Owned By
+## Invariant
+## Cross-niche Prohibition
+---
+7 matches in 4F:
+
+[file] 113 (1):
+     0: "Wiki not yet compiled for this niche. Run [[knowledge-compiler]] first."
+
+---
+PASS no-em-dash
