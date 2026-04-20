@@ -1,6 +1,8 @@
 ---
 name: world-mobile-niche-profile
 description: Niche-specific overlay for World Mobile (DePIN telecom, $WMTX token). Third-party independent creator posture. Overrides brand-voice-system defaults. Declares knowledge_sources for x-posts and web-article adapters. STUB — verify and refine before Day-1 posts.
+static: true
+editable_by: human
 ---
 
 ## STUB NOTICE

@@ -1,6 +1,8 @@
 ---
 name: brand-voice-system
 description: Universal voice framework for all Oopz content. Niches override specifics via their niche-profile skill. Defines 7 voice axes with defaults and per-platform adjustments.
+static: true
+editable_by: human
 ---
 
 ## Purpose

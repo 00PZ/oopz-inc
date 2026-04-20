@@ -1,6 +1,8 @@
 ---
 name: compliance-rules
 description: Mandatory compliance checklist for all content about regulated topics (crypto, finance, DePIN). Applies to Writer, Editor, and Analyst. Not legal advice - a practical content compliance framework.
+static: true
+editable_by: human
 ---
 
 # Compliance Rules
