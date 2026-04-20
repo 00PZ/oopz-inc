@@ -46,3 +46,7 @@ Compile summary per niche logged to `.evidence/task-logs/nightly-wiki-compile/<d
 - Pages skipped (pinned)
 - Errors (if any)
 - Timestamp
+
+## Chain
+
+Followed by [[nightly-qmd-reindex]] at 02:30 for search index refresh.

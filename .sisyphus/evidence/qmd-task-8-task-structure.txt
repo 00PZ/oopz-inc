@@ -1,0 +1,25 @@
+nightly-qmd-reindex task verified:
+  cadence: daily
+  time: 02:30
+  assignee: librarian
+  sync-qmd-collections.ts reference: PRESENT
+  [[nightly-qmd-reindex]] in wiki-compile: PRESENT
+  em-dashes: ABSENT
+
+Files created/updated:
+  - companies/oopz/tasks/nightly-qmd-reindex/TASK.md (new)
+  - companies/oopz/tasks/nightly-wiki-compile/TASK.md (updated with Chain section)
+
+Frontmatter validation:
+  - frequency: daily
+  - hour: 2
+  - minute: 30
+  - assignee: librarian
+  - project: shoshin
+  - timezone: Europe/Amsterdam
+
+Body validation:
+  - sync-qmd-collections.ts invoked per project
+  - Constraints documented (no cross-project, no flag flips, read-only qmd)
+  - Output format specified (per-project summary to task-logs)
+  - Chain reference added to wiki-compile (02:30 follows 02:00)
