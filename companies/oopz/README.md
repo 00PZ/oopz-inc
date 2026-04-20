@@ -140,7 +140,14 @@ The loop compounds: Analyst insights refine skills, which improve future content
 │   Frontmatter: explored(false/true) | confidence | counter_arguments |      │
 │                data_gaps | cross_links | pinned                             │
 └──────────────────┬──────────────────────────────────────────────────────────┘
-                   │ knowledge-query delegation
+                   │ qmd hybrid search (nightly index)
+                   ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ qmd INDEX (~/.cache/qmd/oopz/)  BM25 + vector + LLM re-ranking             │
+│   world-mobile collection: .evidence/wiki/world-mobile/**/*.md              │
+│   Librarian queries via MCP (preferred) or CLI fallback                     │
+└──────────────────┬──────────────────────────────────────────────────────────┘
+                   │ qmd.query -c <niche> --min-score 0.3
                    ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │ CONSUMER AGENTS                                                             │
@@ -220,6 +227,7 @@ R = read, W = write, flags = only explored/pinned fields
 DAILY (Europe/Amsterdam)
 ━━━━━━━━━━━━━━━━━━━━━━━━
 02:00   nightly-wiki-compile     Librarian    compile .evidence/wiki/ per niche
+02:30   nightly-qmd-reindex      Librarian    refresh qmd search index per niche
 06:00   trend-scan               Scout        scan platforms for signals
 07:00   clippings-ingest         Librarian    raw/clippings/ → DB → markdown
 08:00   morning-brief            CoS          daily status overview
@@ -275,6 +283,7 @@ DATA LAYER (contracts + adapters)
   knowledge-compiler          per-niche wiki compilation contract (Librarian)
   knowledge-query             query + filed-back answer contract (Librarian)
   knowledge-lint              quality sweep contract (Librarian)
+  qmd-search                  hybrid search discovery (Librarian only)
   x-posts-adapter             X/Twitter posts intake
   web-article-adapter         blog/news scrape + markdownize intake
   clippings-adapter           Obsidian Web Clipper intake
@@ -418,6 +427,8 @@ companies/oopz/
 ├── COMPANY.md                    company identity, goals, tags
 ├── README.md                     this file
 ├── .paperclip.yaml               runtime config
+├── .qmd/
+│   └── qmd.yml                   qmd collection config (version-controlled; index at ~/.cache/qmd/)
 ├── .gitignore                    selective .evidence/ rules
 │
 ├── agents/                       9 agents, one AGENTS.md each
@@ -575,7 +586,7 @@ Current pipeline projects **every** row from `shoshin-kb.world_mobile.knowledge_
 - Additional Oopz projects (siblings to Shoshin)
 - `youtube-transcripts`, `manual-notes`, `rss`, `reddit` adapters
 - **Knowledge filtering pipeline** (see Known Architectural Gaps above)
-- qmd/BM25 + vector retrieval (at 300+ wiki pages per niche)
+- ~~qmd/BM25 + vector retrieval~~ DONE (see .sisyphus/plans/qmd-integration.md)
 - Cross-project "Oopz brain" (shared knowledge above project level)
 - Obsidian per-project vault integration
 - Autonomy expansion (loosen human-publish gates on low-risk content)

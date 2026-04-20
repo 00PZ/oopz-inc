@@ -1,0 +1,15 @@
+.paperclip.yaml:
+  YAML valid: YES
+  mcp_servers or CLI fallback: PRESENT
+  qmd mentions: 5
+
+QA output:
+  yq parse: YAML valid
+  grep -c 'mcp_servers|CLI fallback|Bash tool': 2
+  grep -c 'qmd': 5
+
+Changes made:
+  - Appended mcp_servers block with qmd stdio transport binding
+  - Documented CLI fallback: qmd query "<question>" -c <niche> --json --min-score 0.3 -n 15
+  - Documented HTTP daemon alternative (commented out)
+  - Preserved all 10 original lines intact

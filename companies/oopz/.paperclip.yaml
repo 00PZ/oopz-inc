@@ -8,3 +8,16 @@ schema: paperclip/v1
 # (e.g. GH_TOKEN for an agent that files issues on GitHub).
 # Runtime handles API keys. Do not set an adapter unless Shoshin
 # targets a specific runtime.
+
+# MCP servers (local, per-company)
+# qmd provides hybrid BM25 + vector search over compiled wiki pages.
+# Preferred: MCP integration via Paperclip's MCP client (stdio transport).
+# Fallback: if Paperclip rejects this schema, Librarian shells out via Bash tool:
+#   qmd query "<question>" -c <niche> --json --min-score 0.3 -n 15
+mcp_servers:
+  qmd:
+    command: qmd
+    args: [mcp]
+    # For long-lived shared daemon instead, use HTTP transport:
+    # url: http://localhost:8181/mcp
+    # Start separately: qmd mcp --http --daemon
