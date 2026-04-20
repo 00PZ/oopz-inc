@@ -16,3 +16,13 @@ raw/**
 
 # Script dependencies
 assets/scripts/node_modules/
+
+# qmd local index + embeddings + sqlite (per-machine, not portable)
+# qmd.yml is tracked; index artifacts are not.
+.qmd/*.sqlite
+.qmd/*.db
+.qmd/.cache/
+.qmd/.index/
+
+# qmd HTTP daemon PID file (per-machine)
+.qmd/mcp.pid
