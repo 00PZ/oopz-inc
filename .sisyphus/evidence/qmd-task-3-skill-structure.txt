@@ -1,0 +1,65 @@
+QA Evidence: qmd-search SKILL.md
+Generated: 2026-04-20
+File: companies/oopz/skills/qmd-search/SKILL.md
+
+=== FRONTMATTER ===
+name: qmd-search
+static: null (not present - correct, this is NOT a Brand Foundation skill)
+description: Hybrid BM25 + vector + LLM re-ranking search over a niche's compiled wiki. Used by Librarian for discovery before knowledge-query synthesis. Local-only, no API keys, per-niche scope enforced.
+
+=== ALL 11 SECTIONS PRESENT ===
+PASS: Purpose
+PASS: Scope Discipline (CRITICAL)
+PASS: Invocation Patterns
+PASS: Required Invocation Options
+PASS: Result Interpretation
+PASS: Integration with knowledge-query
+PASS: MCP vs CLI
+PASS: No Auto-flip of Explored Flag
+PASS: Owned By
+PASS: Cadence Dependency
+PASS: Out of Scope for v1
+
+=== SCOPE DISCIPLINE ===
+"NEVER cross-niche" count: 1 (explicit in Scope Discipline section)
+Additional "Never cross-niche" in Scope Discipline section body: present
+
+=== INVOCATION EXAMPLES (4 required, 9 found) ===
+- qmd query (discovery before synthesis)
+- qmd get (exact document lookup)
+- qmd multi-get (batch retrieval)
+- qmd status (status check)
+- qmd query with --json (CLI fallback example)
+Plus additional inline references in Required Invocation Options and MCP vs CLI sections
+
+=== SCORE BANDS (all 4 required) ===
+0.8-1.0: Highly relevant
+0.5-0.8: Moderately relevant
+0.2-0.5: Somewhat relevant
+below 0.2: Likely noise (filter via --min-score)
+
+=== MCP VS CLI FALLBACK ===
+PASS: Both paths documented
+PASS: MCP preferred (via .paperclip.yaml mcpServers)
+PASS: CLI fallback via Bash tool with --json flag
+PASS: Both paths require -c <niche>
+
+=== NO AUTO-FLIP RULE ===
+PASS: Explicit section "No Auto-flip of Explored Flag"
+PASS: "Never auto-flip. No exceptions." present
+
+=== WIKILINKS ===
+[[knowledge-query]]: 4 occurrences
+[[nightly-qmd-reindex]]: 2 occurrences
+[[nightly-wiki-compile]]: 1 occurrence
+[[knowledge-compiler]]: 3 occurrences
+
+=== EM-DASH CHECK ===
+PASS: zero em-dashes found
+
+=== MUST NOT DO COMPLIANCE ===
+PASS: No cross-niche invocations described
+PASS: No qmd write operations described (read-only from Librarian's perspective)
+PASS: No LLM provider API references (only "GGUF models" mentioned)
+PASS: No duplication of qmd docs (links to https://github.com/tobi/qmd)
+PASS: No static: true in frontmatter
