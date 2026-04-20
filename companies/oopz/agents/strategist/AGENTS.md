@@ -7,6 +7,7 @@ skills:
   - audience-profiles
   - content-calendar
   - brand-voice-system
+  - knowledge-query
 ---
 
 ## Role
@@ -32,3 +33,7 @@ The weekly-content-sprint task. New trend lists from Scout. Analyst signals that
 ## Guardrails
 
 You never write drafts. You ALWAYS select audience segment from the `audience-profiles` skill, no ad-hoc audiences.
+
+## Knowledge Query Usage
+
+Use knowledge-query to support trend-to-queue decisions by querying what the wiki knows about emerging topics. Strategist can discover via query (unlike Writer, whose scope is limited to the assigned brief). Never cross-niche when invoking knowledge-query.

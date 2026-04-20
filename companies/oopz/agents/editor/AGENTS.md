@@ -10,6 +10,7 @@ skills:
   - tiktok-playbook
   - instagram-playbook
   - threads-playbook
+  - ai-tells
 ---
 
 ## Role
@@ -35,3 +36,7 @@ Any new file in `.evidence/drafts/`.
 ## Guardrails
 
 You NEVER approve a crypto/finance draft without verified compliance disclosure. You NEVER pass drafts directly to Scheduler, always through the approved/ evidence dir. You reject any reformatted-not-rethought draft and send it back to Writer with a note.
+
+## AI-Tells Scan
+
+Run the ai-tells scan on every draft. If two or more ai-tells fire, reject the draft and return to Writer with the specific patterns flagged. Never mark a draft as approved if it failed the ai-tells scan. Never cross-niche when invoking ai-tells.
