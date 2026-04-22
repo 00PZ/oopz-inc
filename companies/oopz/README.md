@@ -228,7 +228,7 @@ DAILY (Europe/Amsterdam)
 ━━━━━━━━━━━━━━━━━━━━━━━━
 02:00   nightly-wiki-compile     Librarian    compile .evidence/wiki/ per niche
 02:30   nightly-qmd-reindex      Librarian    refresh qmd search index per niche
-06:00   trend-scan               Scout        scan platforms for signals
+06:00   trend-scan-morning       Scout        scan platforms for signals
 07:00   clippings-ingest         Librarian    raw/clippings/ → DB → markdown
 08:00   morning-brief            CoS          daily status overview
 18:00   trend-scan-evening       Scout        second daily scan
@@ -452,14 +452,15 @@ companies/oopz/
 │       ├── PROJECT.md            niches: [world-mobile]
 │       └── tasks/                project-scoped tasks
 │
-├── tasks/                        company-level scheduled tasks
+├── tasks/                        company-level scheduled agent tasks
+│   ├── clippings-ingest/         body only; schedule in .paperclip.yaml:routines
 │   ├── morning-brief/
-│   ├── trend-scan/
+│   ├── nightly-qmd-reindex/
+│   ├── nightly-wiki-compile/
+│   ├── trend-scan/               slug: trend-scan-morning
 │   ├── trend-scan-evening/
 │   ├── weekly-analyst-review/
-│   ├── clippings-ingest/         daily 07:00
-│   ├── nightly-wiki-compile/     daily 02:00
-│   └── weekly-wiki-lint/         friday 15:30
+│   └── weekly-wiki-lint/
 │
 ├── skills/                       all loadable skills
 │   ├── brand-foundation/         BF posture README (container, not a skill)
@@ -526,25 +527,12 @@ companies/oopz/
 
 ## Scheduling
 
-Two separate scheduling concerns:
+Two separate scheduling concerns with no overlap:
 
-**Paperclip Routines** (agent tasks, wired, see `.paperclip.yaml:routines`):
-```
-nightly-wiki-compile      daily 02:00       librarian     compile per-niche wikis
-nightly-qmd-reindex       daily 02:30       librarian     refresh qmd search index
-trend-scan-morning        daily 06:00       scout         scan platforms for signals
-clippings-ingest          daily 07:00       librarian     ingest raw/clippings/
-morning-brief             daily 08:00       chief-of-staff post daily brief
-weekly-content-sprint     mon 10:00         strategist    plan week's content
-weekly-wiki-lint          fri 15:30         librarian     lint per-niche wikis
-weekly-analyst-review     fri 16:00         analyst       weekly performance review
-intelligence-seed         fri 17:30         analyst       seed proposed-* diffs
-trend-scan-evening        daily 18:00       scout         scan platforms for signals
-```
+**Paperclip Routines** handle agent execution. Ten routines are wired in `.paperclip.yaml:routines`, one per `tasks/<slug>/TASK.md`. Paperclip's importer reads the routines block at `paperclipai company import`, creates a Routine per slug with a cron trigger, and fires the assignee agent at each tick via issue creation and heartbeat wakeup. TASK.md body is the instruction set; `.paperclip.yaml` is the schedule source of truth. See the Daily + Weekly Cadence section above for the full timetable.
 
-Paperclip's Routine system reads `.paperclip.yaml:routines` at `paperclipai company import`, creates a Routine per slug with a cron trigger, and fires the assignee agent at each tick (via issue + heartbeat wakeup). TASK.md body is the instruction set; `.paperclip.yaml` is the schedule source of truth. All times Europe/Amsterdam.
+**Trigger.dev ingest jobs** handle data-pipeline scripts. Not yet wired. The scripts under `assets/scripts/` (fetch-x-posts, fetch-web-article, fetch-clippings, kb-to-markdown) are stubs. When implemented, they will run under Trigger.dev or cron:
 
-**Trigger.dev ingest jobs** (data-pipeline scripts, not yet wired):
 ```
 Self-hosted Trigger.dev (existing upstream):
   tweet-curator-scraper          every 15min    → tweet-curator-pg
@@ -557,7 +545,7 @@ Oopz ingest jobs (planned, stubs in assets/scripts/):
   oopz-fetch-clippings           daily 07:00    raw/clippings/ → shoshin-kb
 ```
 
-Upstream scrapers own source DBs. Oopz ingest jobs pull from source DBs into `shoshin-kb`. `kb-to-markdown.ts` projects to files. Agents read files. Paperclip Routines handle agent execution. Trigger.dev (once wired) handles data-pipeline scripts. No overlap.
+Upstream scrapers own source DBs. Oopz ingest jobs pull from source DBs into `shoshin-kb`. `kb-to-markdown.ts` projects to files. Agents read files. Paperclip Routines handle agent execution. Trigger.dev (once wired) handles data-pipeline scripts. The two systems never touch the same concern.
 
 ---
 
