@@ -21,3 +21,60 @@ mcp_servers:
     # For long-lived shared daemon instead, use HTTP transport:
     # url: http://localhost:8181/mcp
     # Start separately: qmd mcp --http --daemon
+
+# Routines (scheduled agent tasks)
+# Each routine slug matches a tasks/<slug>/TASK.md body.
+# Paperclip's Routine system fires the assignee agent at each cron tick.
+# Defaults: concurrencyPolicy=coalesce_if_active, catchUpPolicy=skip_missed.
+# All times Europe/Amsterdam.
+routines:
+  nightly-wiki-compile:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 2 * * *"
+        timezone: Europe/Amsterdam
+  nightly-qmd-reindex:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 2 * * *"
+        timezone: Europe/Amsterdam
+  trend-scan-morning:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 6 * * *"
+        timezone: Europe/Amsterdam
+  clippings-ingest:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 7 * * *"
+        timezone: Europe/Amsterdam
+  morning-brief:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 8 * * *"
+        timezone: Europe/Amsterdam
+  weekly-content-sprint:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 10 * * 1"
+        timezone: Europe/Amsterdam
+  weekly-wiki-lint:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 15 * * 5"
+        timezone: Europe/Amsterdam
+  weekly-analyst-review:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 16 * * 5"
+        timezone: Europe/Amsterdam
+  intelligence-seed:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 17 * * 5"
+        timezone: Europe/Amsterdam
+  trend-scan-evening:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 18 * * *"
+        timezone: Europe/Amsterdam

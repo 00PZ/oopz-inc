@@ -3,17 +3,6 @@ name: Shoshin Weekly Content Sprint
 slug: weekly-content-sprint
 assignee: strategist
 project: shoshin
-schedule:
-  timezone: Europe/Amsterdam
-  startsAt: 2026-04-20T10:00:00+02:00
-  recurrence:
-    frequency: weekly
-    interval: 1
-    weekdays:
-      - monday
-    time:
-      hour: 10
-      minute: 0
 ---
 
 Every Monday 10:00 Europe/Amsterdam. This task runs at the Shoshin PROJECT level and **iterates over every niche** listed in `projects/shoshin/PROJECT.md`'s `niches:` frontmatter (Day 1: `[world-mobile]`; add-a-niche = append a slug there, then this task picks it up on the next Monday).

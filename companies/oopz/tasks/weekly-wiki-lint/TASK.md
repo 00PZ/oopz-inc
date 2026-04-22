@@ -3,17 +3,6 @@ name: Weekly Wiki Lint
 slug: weekly-wiki-lint
 assignee: librarian
 project: shoshin
-schedule:
-  timezone: Europe/Amsterdam
-  startsAt: 2026-04-25T15:30:00+02:00
-  recurrence:
-    frequency: weekly
-    interval: 1
-    weekdays:
-      - friday
-    time:
-      hour: 15
-      minute: 30
 ---
 
 Every Friday 15:30 Europe/Amsterdam. Librarian lints per-niche wikis for contradictions, orphaned pages, duplicate concepts, missing counter-arguments, data gaps, and broken cross-links. Produces quality reports that feed the 16:00 weekly-analyst-review on the same day.

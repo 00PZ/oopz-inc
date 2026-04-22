@@ -3,15 +3,6 @@ name: Nightly qmd Reindex
 slug: nightly-qmd-reindex
 assignee: librarian
 project: shoshin
-schedule:
-  timezone: Europe/Amsterdam
-  startsAt: 2026-04-20T02:30:00+02:00
-  recurrence:
-    frequency: daily
-    interval: 1
-    time:
-      hour: 2
-      minute: 30
 ---
 
 Nightly qmd index refresh at 02:30 Europe/Amsterdam. Runs after [[nightly-wiki-compile]] (02:00) to ensure the search index reflects newly compiled wiki pages within hours.

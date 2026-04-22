@@ -3,17 +3,6 @@ name: Shoshin Intelligence Seed
 slug: intelligence-seed
 assignee: analyst
 project: shoshin
-schedule:
-  timezone: Europe/Amsterdam
-  startsAt: 2026-04-24T17:30:00+02:00
-  recurrence:
-    frequency: weekly
-    interval: 1
-    weekdays:
-      - friday
-    time:
-      hour: 17
-      minute: 30
 ---
 
 Every Friday 17:30 Europe/Amsterdam (after the company-wide weekly-analyst-review at 16:00). This task is SCOPED TO THE SHOSHIN PROJECT and **iterates over every niche** in `projects/shoshin/PROJECT.md`'s `niches:` list (Day 1: `[world-mobile]`). For each niche: Analyst runs the `[[intelligence-seed]]` skill over `.evidence/knowledge/<niche-slug>/`, produces proposed-* diff files, hands to Chief of Staff for human review.

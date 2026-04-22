@@ -3,15 +3,6 @@ name: Clippings Ingest
 slug: clippings-ingest
 assignee: librarian
 project: shoshin
-schedule:
-  timezone: Europe/Amsterdam
-  startsAt: 2026-04-20T07:00:00+02:00
-  recurrence:
-    frequency: daily
-    interval: 1
-    time:
-      hour: 7
-      minute: 0
 ---
 
 Daily clippings intake at 07:00 Europe/Amsterdam. Librarian ingests Obsidian Web Clipper markdown drops from `raw/clippings/` into the knowledge base.

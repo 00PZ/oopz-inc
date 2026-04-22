@@ -3,15 +3,6 @@ name: Nightly Wiki Compile
 slug: nightly-wiki-compile
 assignee: librarian
 project: shoshin
-schedule:
-  timezone: Europe/Amsterdam
-  startsAt: 2026-04-20T02:00:00+02:00
-  recurrence:
-    frequency: daily
-    interval: 1
-    time:
-      hour: 2
-      minute: 0
 ---
 
 Nightly wiki compilation at 02:00 Europe/Amsterdam. Librarian compiles per-niche wikis from normalized knowledge items before the 06:00 trend-scan and 07:00 clippings-ingest tasks.
