@@ -1,0 +1,33 @@
+# Runtime data populated by adapter scripts, consumed by agents.
+# .evidence/knowledge/ and .evidence/analysis/ are runtime artifacts.
+# .evidence/wiki/ is git-tracked (preserves explored/pinned review state).
+.evidence/knowledge/
+.evidence/analysis/
+.evidence/trends/
+.evidence/task-logs/
+
+# Stray evidence files at .evidence/ root (plan-execution artifacts belong
+# under .sisyphus/evidence/ at repo root, not here). Catches task-*.txt
+# dumps that escaped their target location.
+.evidence/*.txt
+
+# Raw intake (Obsidian Web Clipper drops). Content is ephemeral;
+# fetch-clippings.ts processes and moves to processed/.
+# Only .gitkeep files are tracked for directory structure.
+raw/**
+!raw/
+!raw/**/
+!raw/**/.gitkeep
+
+# Script dependencies
+assets/scripts/node_modules/
+
+# qmd local index + embeddings + sqlite (per-machine, not portable)
+# qmd.yml is tracked; index artifacts are not.
+.qmd/*.sqlite
+.qmd/*.db
+.qmd/.cache/
+.qmd/.index/
+
+# qmd HTTP daemon PID file (per-machine)
+.qmd/mcp.pid

@@ -1,0 +1,80 @@
+schema: paperclip/v1
+# Deliberately minimal. Agents do NOT need any DB credentials.
+# Database access is confined to external scripts in assets/scripts/,
+# which run outside Paperclip (user shell, Trigger.dev, cron). Agents
+# consume the resulting markdown in .evidence/knowledge/<niche-slug>/.
+#
+# Add per-agent env overrides here ONLY when a real need surfaces
+# (e.g. GH_TOKEN for an agent that files issues on GitHub).
+# Runtime handles API keys. Do not set an adapter unless ${BRAND_NAME}
+# targets a specific runtime.
+
+# MCP servers (local, per-company)
+# qmd provides hybrid BM25 + vector search over compiled wiki pages.
+# Preferred: MCP integration via Paperclip's MCP client (stdio transport).
+# Fallback: if Paperclip rejects this schema, Librarian shells out via Bash tool:
+#   qmd query "<question>" -c <niche> --json --min-score 0.3 -n 15
+mcp_servers:
+  qmd:
+    command: qmd
+    args: [mcp]
+    # For long-lived shared daemon instead, use HTTP transport:
+    # url: http://localhost:8181/mcp
+    # Start separately: qmd mcp --http --daemon
+
+# Routines (scheduled agent tasks)
+# Each routine slug matches a tasks/<slug>/TASK.md body.
+# Paperclip's Routine system fires the assignee agent at each cron tick.
+# Defaults: concurrencyPolicy=coalesce_if_active, catchUpPolicy=skip_missed.
+# All times ${BRAND_TIMEZONE}.
+routines:
+  nightly-wiki-compile:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 2 * * *"
+        timezone: ${BRAND_TIMEZONE}
+  nightly-qmd-reindex:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 2 * * *"
+        timezone: ${BRAND_TIMEZONE}
+  trend-scan-morning:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 6 * * *"
+        timezone: ${BRAND_TIMEZONE}
+  clippings-ingest:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 7 * * *"
+        timezone: ${BRAND_TIMEZONE}
+  morning-brief:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 8 * * *"
+        timezone: ${BRAND_TIMEZONE}
+  weekly-content-sprint:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 10 * * 1"
+        timezone: ${BRAND_TIMEZONE}
+  weekly-wiki-lint:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 15 * * 5"
+        timezone: ${BRAND_TIMEZONE}
+  weekly-analyst-review:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 16 * * 5"
+        timezone: ${BRAND_TIMEZONE}
+  intelligence-seed:
+    triggers:
+      - kind: schedule
+        cronExpression: "30 17 * * 5"
+        timezone: ${BRAND_TIMEZONE}
+  trend-scan-evening:
+    triggers:
+      - kind: schedule
+        cronExpression: "0 18 * * *"
+        timezone: ${BRAND_TIMEZONE}

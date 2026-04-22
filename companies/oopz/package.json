@@ -1,7 +1,0 @@
-{
-  "name": "oopz",
-  "private": true,
-  "dependencies": {
-    "zod": "^3.23.0"
-  }
-}
