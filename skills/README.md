@@ -13,6 +13,8 @@ Skills here are maintained in one place and copied into company packages when ne
 
 The split exists because each brand may need a customized version of a skill. Copying gives you that freedom without tangling the source.
 
+The same library-vs-runtime pattern applies to `agents/` and `teams/` at repo root. Generic AGENTS.md and TEAM.md files live there as source; they are copied (and optionally parameterized via templates) into each company package during scaffold.
+
 ## Usage Pattern
 
 To use a skill in a company:

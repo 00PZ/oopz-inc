@@ -73,7 +73,50 @@ for team in discovery production operations; do
 done
 ```
 
-## 6. Create .gitignore
+## 6. Copy agents from repo-root library
+
+The repo root has a shared `agents/` library with all 9 agent definitions. Copy the whole tree into the company package:
+
+```bash
+cp -r agents/ companies/<brand>/agents/
+```
+
+Four agents are parameterized and need brand-specific content generated from templates. Set your brand variables, then run `envsubst` to overwrite the generic copies:
+
+```bash
+export BRAND_NAME=<brand>
+export BRAND_DESCRIPTION="<one-line description>"
+export PLATFORMS="<platform list, e.g. X, TikTok, Instagram, and Threads>"
+export NICHES_DESCRIPTION="<how to reference active niches>"
+export COMPLIANCE_POSTURE="<risk statement>"
+export COMPLIANCE_GUARDRAIL="<the specific guardrail>"
+export NICHE_PROFILE_FILENAME="<niche>-niche-profile.md"
+
+envsubst < skills/company-creator/templates/chief-of-staff.AGENTS.md.tmpl > companies/<brand>/agents/chief-of-staff/AGENTS.md
+envsubst < skills/company-creator/templates/scout.AGENTS.md.tmpl > companies/<brand>/agents/scout/AGENTS.md
+envsubst < skills/company-creator/templates/scheduler.AGENTS.md.tmpl > companies/<brand>/agents/scheduler/AGENTS.md
+envsubst < skills/company-creator/templates/analyst.AGENTS.md.tmpl > companies/<brand>/agents/analyst/AGENTS.md
+```
+
+The remaining 5 agents (strategist, researcher, librarian, writer, editor) are generic and can be used as-is from the copy.
+
+## 7. Copy teams from repo-root library
+
+The repo root also has a shared `teams/` library with the 3 team definitions. Copy them in:
+
+```bash
+cp -r teams/ companies/<brand>/teams/
+```
+
+The generic team files say "serves the company". To make them brand-specific, optionally replace that phrase:
+
+```bash
+for team in discovery production operations; do
+  sed -i 's/serves the company/serves the <brand> company/g' companies/<brand>/teams/${team}/TEAM.md
+done
+```
+
+## 8. Create .gitignore
 
 ```bash
 cat > companies/<brand>/.gitignore << 'EOF'
@@ -95,19 +138,35 @@ EOF
 The `.evidence/wiki/` directory is git-tracked so humans can review and flip
 `explored` flags. Everything else under `.evidence/` is regenerable.
 
-## 7. Verify structure
+## 9. Verify structure
 
 ```bash
 find companies/<brand> -type f | sort
 ```
 
-Expected output (at minimum):
+Also check agent and team file counts:
+
+```bash
+ls companies/<brand>/agents/*/AGENTS.md | wc -l   # Expected: 9
+ls companies/<brand>/teams/*/TEAM.md | wc -l       # Expected: 3
+```
+
+Expected output from `find` (at minimum):
 
 ```
 companies/<brand>/.gitignore
 companies/<brand>/.paperclip.yaml
 companies/<brand>/AGENTS.md
 companies/<brand>/COMPANY.md
+companies/<brand>/agents/analyst/AGENTS.md
+companies/<brand>/agents/chief-of-staff/AGENTS.md
+companies/<brand>/agents/editor/AGENTS.md
+companies/<brand>/agents/librarian/AGENTS.md
+companies/<brand>/agents/researcher/AGENTS.md
+companies/<brand>/agents/scheduler/AGENTS.md
+companies/<brand>/agents/scout/AGENTS.md
+companies/<brand>/agents/strategist/AGENTS.md
+companies/<brand>/agents/writer/AGENTS.md
 companies/<brand>/teams/discovery/TEAM.md
 companies/<brand>/teams/operations/TEAM.md
 companies/<brand>/teams/production/TEAM.md

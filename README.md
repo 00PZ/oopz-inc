@@ -10,8 +10,10 @@ Portfolio git repo for Paperclip agent companies.
 
 | Directory | Purpose |
 |-----------|---------|
+| `agents/` | Reusable agent definitions. Source AGENTS.md files copied into company packages during scaffold. |
 | `companies/` | Paperclip company packages. Each subdirectory is a standalone company that can be imported into Paperclip. |
 | `skills/` | Reusable skills library. Source skills that can be copied into company packages or used as references. |
+| `teams/` | Reusable team definitions. Source TEAM.md files copied into company packages during scaffold. |
 
 ---
 
