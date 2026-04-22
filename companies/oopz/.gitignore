@@ -6,6 +6,11 @@
 .evidence/trends/
 .evidence/task-logs/
 
+# Stray evidence files at .evidence/ root (plan-execution artifacts belong
+# under .sisyphus/evidence/ at repo root, not here). Catches task-*.txt
+# dumps that escaped their target location.
+.evidence/*.txt
+
 # Raw intake (Obsidian Web Clipper drops). Content is ephemeral;
 # fetch-clippings.ts processes and moves to processed/.
 # Only .gitkeep files are tracked for directory structure.

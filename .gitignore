@@ -1,0 +1,17 @@
+# Sisyphus orchestration state (per-machine, non-portable)
+# boulder.json, evidence/, notepads/, plans/ are all local agent state.
+.sisyphus/
+
+# Node / Bun dependencies (any level in the repo)
+node_modules/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor noise
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
