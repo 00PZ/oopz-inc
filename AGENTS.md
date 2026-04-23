@@ -8,8 +8,8 @@
 
 | Path | Purpose |
 |------|---------|
-| `agents/` | Source agent library. 9 AGENTS.md files. Copy into company packages at scaffold time. |
-| `teams/` | Source team library. 3 TEAM.md files. Copy into company packages at scaffold time. |
+| `agents/` | Source agent library. 15 AGENTS.md files. Copy into company packages at scaffold time. |
+| `teams/` | Source team library. 4 TEAM.md files. Copy into company packages at scaffold time. |
 | `skills/` | Source skills library. Copy into company packages. NOT a Paperclip runtime dir. |
 | `companies/` | Paperclip company packages. Each subdirectory is a standalone importable company. |
 | `.sisyphus/` | AI agent work state (plans, notepads, evidence). Do not modify manually. |
@@ -32,6 +32,7 @@
 **Engineering team (generic, stack-agnostic, TDD-disciplined):**
 - `software-architect`, `senior-developer`, `code-reviewer`, `devops-engineer`, `security-engineer`, `technical-writer`
 - Team definition: `teams/engineering/TEAM.md`
+- Stack team definition: `teams/stack/TEAM.md` (same agents, Vite + k8s + CNPG + Tailscale + GitHub Actions toolchain)
 
 **Parameterized (have generic defaults, use templates for brand-specific versions):**
 - `chief-of-staff`, `scout`, `scheduler`, `analyst`

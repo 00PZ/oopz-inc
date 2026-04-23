@@ -35,6 +35,14 @@ Current skills:
 
 - `company-creator` - Scaffold a new Paperclip company package from scratch
 - `knowledge-base-setup` - Bootstrap a company's knowledge base structure
+- `tdd-workflow` - RED-GREEN-REFACTOR-REVIEW-SHIP loop for test-driven implementation
+- `code-review-checklist` - Diff review methodology with blocker/suggestion/nit triage
+- `release-checklist` - Pre-release gate with tests, docs, deploy steps, and rollback plan
+- `vite-build` - Vite dev server, production build, bundle analysis
+- `github-actions-release` - GitHub Actions release workflow patterns
+- `k8s-deploy` - Kubernetes deployment, rollout, and rollback patterns
+- `cnpg-operations` - CloudNativePG cluster operations and day-2 management
+- `tailscale-network` - Tailscale ACL design, MagicDNS, and Kubernetes integration
 
 See [`skills/README.md`](skills/README.md) for details on each skill.
 

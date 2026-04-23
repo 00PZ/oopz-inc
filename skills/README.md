@@ -58,6 +58,26 @@ Pragmatic code review methodology. Triages diff feedback into blocker, suggestio
 
 Pre-release gate covering tests, documentation, deployment steps, and rollback plan. Stack-agnostic process suitable for any deployment target.
 
+### `vite-build/`
+
+Vite dev server, production build, preview, bundle analysis, and common pitfalls for frontend applications. Opinionated for a Vite + TypeScript base.
+
+### `github-actions-release/`
+
+GitHub Actions release workflow patterns. Covers lint, test, build, container image publish, and triggered deploys. Uses real workflow YAML.
+
+### `k8s-deploy/`
+
+Kubernetes deployment patterns. Manifests, rollout, rollback, resource sizing, probes, and common production gotchas.
+
+### `cnpg-operations/`
+
+CloudNativePG cluster operations. Covers cluster provisioning, backups, point-in-time recovery, failover, role and schema management, and connection patterns.
+
+### `tailscale-network/`
+
+Tailscale patterns for private networking. Covers MagicDNS, ACL design, tagged service accounts, exit nodes, and connecting Kubernetes services across a tailnet.
+
 ## Skill Conventions
 
 Each skill is a directory containing at least one file:
