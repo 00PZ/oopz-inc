@@ -46,6 +46,18 @@ Orchestration playbook for creating a new brand company in oopz-inc. Covers 7 ph
 
 Focused guide for setting up the Postgres knowledge base layer. Covers schema-per-niche design, adapter patterns, and markdown projection for the librarian agent.
 
+### `tdd-workflow/`
+
+Disciplined RED, GREEN, REFACTOR, REVIEW, SHIP loop for test-driven implementation work. Stack-agnostic process for any language or framework.
+
+### `code-review-checklist/`
+
+Pragmatic code review methodology. Triages diff feedback into blocker, suggestion, and nit priorities. Stack-agnostic, review any language.
+
+### `release-checklist/`
+
+Pre-release gate covering tests, documentation, deployment steps, and rollback plan. Stack-agnostic process suitable for any deployment target.
+
 ## Skill Conventions
 
 Each skill is a directory containing at least one file:

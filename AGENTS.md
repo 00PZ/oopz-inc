@@ -24,10 +24,14 @@
 
 ## Agents Library
 
-9 agents total, split into two groups:
+15 agents total, split into three groups:
 
 **Generic (copy verbatim, zero brand references):**
 - `strategist`, `researcher`, `librarian`, `writer`, `editor`
+
+**Engineering team (generic, stack-agnostic, TDD-disciplined):**
+- `software-architect`, `senior-developer`, `code-reviewer`, `devops-engineer`, `security-engineer`, `technical-writer`
+- Team definition: `teams/engineering/TEAM.md`
 
 **Parameterized (have generic defaults, use templates for brand-specific versions):**
 - `chief-of-staff`, `scout`, `scheduler`, `analyst`
