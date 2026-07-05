@@ -203,15 +203,15 @@ knowledge_sources:
         - em_bee_cee        # ✅ verified, Mike BC (WM CMO), 987 followers, London, joined Nov 2022 — 0 posts yet
         - WMGregoryG        # unverified — aerial platform / Stratospheric technology specialist
         - jamestagg         # unverified — James Tagg, co-founder, invented multi-SIM tech
-        # Community members
-        - CloverNodes       # ✅ verified, 10.5K followers, 41K posts — high-signal community operator, LA
-        - theadaape         # unverified — community member
-        - NOVAverseNODE     # unverified — NOVA Verse Node operator
-        - WelfBrandolf      # unverified — Brandolf, community
-        - hidrexnodes       # unverified — Hidrex Nodes
-        - wavenodes_io      # unverified — Waves Nodes
-        - WMTxLady          # unverified — WMTx Lady, community
-        - NuvolaDigital     # unverified — Nuvola Digital (WM distribution partner)
+        # Community members (all verified 2026-07-05)
+        - CloverNodes       # ✅ 10.5K followers, 41K posts — high-signal operator, LA
+        - WMTxLady          # ✅ 2,073 followers, 3,174 posts — threads/AMA recaps, Spain
+        - wavenodes_io      # ✅ 4,019 followers, 3,829 posts — EarthNode operator #3
+        - hidrexnodes       # ✅ 3,548 followers, 2,927 posts — WM/MinutesNetwork/UnityNodes data intel
+        - WelfBrandolf      # ✅ 2,150 followers, 26K posts — @wmchain Ambassador, Depinity co-founder
+        - NuvolaDigital     # ✅ 5,665 followers — Cardano DePIN aggregator, regular WM content
+        - NOVAverseNODE     # ✅ 1,459 followers, 0 posts — active on-chain; low output signal for now
+        # theadaape — ⚠️ SUSPENDED as of 2026-07-05 (removed)
         # NOTE: wmtmicko, MicMicko, PartsOfaCircle — all suspended as of 2026-07-05
         # NOTE: ShoshinNodes is OUR output account — do NOT add here (output ≠ knowledge source)
       tweet_text_regex: "(?i)world ?mobile|\\$wmtx|earth ?node|air ?node|ember ?node|depin telecom|network builder"
