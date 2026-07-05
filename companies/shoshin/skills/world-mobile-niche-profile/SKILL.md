@@ -132,12 +132,29 @@ Content Manager refreshes this file weekly with what performs and what does not.
 
 ```yaml
 knowledge_sources:
+
+  # ─── X / TWITTER ───────────────────────────────────────────────────────────
   x-posts:
     enabled: true
     selector:
       author_username_in:
-        - WorldMobileTeam   # verified active, 60.5K followers, official account
-        - MrTelecoms        # verified active, Micky Watkins CEO, 13.8K followers, @MrTelecoms
+        # Official accounts
+        - WorldMobileTeam   # ✅ verified, 60.5K followers, official account
+        - wmtoken           # ✅ active (worldmobilechain / @wmchain), 358 followers, 0 posts — low signal for now
+        - worldmobileesim   # ✅ verified, 1,082 followers, 138 posts — travel eSIM focused
+        - MrTelecoms        # ✅ verified, Micky Watkins CEO, 13.8K followers
+        - MikeWorldMobile   # ⚠️ SUSPENDED as of 2026-07-05 (WM CMO) — re-check periodically
+        - WMGregoryG        # unverified — aerial platform / Stratospheric technology specialist
+        - jamestagg         # unverified — James Tagg, co-founder, invented multi-SIM tech
+        # Community members
+        - CloverNodes       # ✅ verified, 10.5K followers, 41K posts — high-signal community operator, LA
+        - theadaape         # unverified — community member
+        - NOVAverseNODE     # unverified — NOVA Verse Node operator
+        - WelfBrandolf      # unverified — Brandolf, community
+        - hidrexnodes       # unverified — Hidrex Nodes
+        - wavenodes_io      # unverified — Waves Nodes
+        - WMTxLady          # unverified — WMTx Lady, community
+        - NuvolaDigital     # unverified — Nuvola Digital (WM distribution partner)
         # NOTE: wmtmicko, MicMicko, PartsOfaCircle — all suspended as of 2026-07-05
         # NOTE: ShoshinNodes is OUR output account — do NOT add here (output ≠ knowledge source)
       tweet_text_regex: "(?i)world ?mobile|\\$wmtx|earth ?node|air ?node|ember ?node|depin telecom|network builder"
@@ -154,11 +171,16 @@ knowledge_sources:
         view_count: 1000
       exclude_replies_to_nonfollowed: true
       lookback_days: 90
+    x_lists:
+      - id: "1631020768996753409"   # World Mobile EarthNode Operator List
+
+  # ─── WEBSITES ──────────────────────────────────────────────────────────────
   web-article:
     enabled: true
     selector:
       url_patterns:
         - "worldmobile.io/blog/*"
+        - "airnode.worldmobile.net/*"
         - "depin.ninja/*"
       rss_feeds:
         - "https://worldmobile.io/feed.xml"   # TODO: verify this endpoint is live before first seed run
@@ -171,10 +193,26 @@ knowledge_sources:
         - depin telecom
         - network builder
         - world mobile chain
+        - atmosphere grid
+        - unity node
     refresh_cadence: weekly
+
+  # ─── KNOWLEDGE BASE ────────────────────────────────────────────────────────
+  # worldmobile.zohodesk.com/portal/en/kb — official help/KB
+  # Use for: verifying product specs, node types, onboarding processes
+  # Not for automated ingestion — manual reference only
+
+  # ─── OTHER CHANNELS (monitoring only, not automated ingestion) ─────────────
+  # YouTube:   https://www.youtube.com/channel/UCw8cjqZEfYIs1I-bMocfXAg
+  # LinkedIn:  https://www.linkedin.com/company/worldmobilegroup/
+  # Instagram: https://www.instagram.com/WorldMobileTeam/
+  # Facebook:  https://www.facebook.com/WorldMobileTeam/
+  # Reddit:    https://www.reddit.com/r/worldmobile/   — community sentiment source
+  # Discord:   https://discord.com/invite/worldmobile  — announcements (Unity Node likely here)
+  # Telegram:  https://t.me/WorldMobileTeam            — announcements
 ```
 
-> **TODO before first seed run**: (1) verify `worldmobile.io/feed.xml` returns valid RSS. (2) Research Unity Node — not yet on official blog/site, likely Telegram/Discord announced. (3) Find additional active WM community handles to add to `author_username_in`.
+> **TODO before first seed run**: (1) verify `worldmobile.io/feed.xml` returns valid RSS. (2) Research Unity Node — check Discord/Telegram announcements. (3) Verify unverified X handles and remove suspended ones. (4) Consider adding Reddit `/r/worldmobile` as web-article source for community sentiment.
 
 ---
 
