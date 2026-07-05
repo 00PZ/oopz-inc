@@ -198,7 +198,8 @@ knowledge_sources:
         - wmtoken           # ✅ active (worldmobilechain / @wmchain), 358 followers, 0 posts — low signal for now
         - worldmobileesim   # ✅ verified, 1,082 followers, 138 posts — travel eSIM focused
         - MrTelecoms        # ✅ verified, Micky Watkins CEO, 13.8K followers
-        - MikeWorldMobile   # ⚠️ SUSPENDED as of 2026-07-05 (WM CMO) — re-check periodically
+        - MikeWorldMobile   # ⚠️ SUSPENDED as of 2026-07-05 (old CMO handle)
+        - em_bee_cee        # ✅ verified, Mike BC (WM CMO), 987 followers, London, joined Nov 2022 — 0 posts yet
         - WMGregoryG        # unverified — aerial platform / Stratospheric technology specialist
         - jamestagg         # unverified — James Tagg, co-founder, invented multi-SIM tech
         # Community members
