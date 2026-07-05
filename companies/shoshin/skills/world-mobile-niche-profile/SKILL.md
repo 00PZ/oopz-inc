@@ -128,6 +128,7 @@ knowledge_sources:
       author_username_in:
         - WorldMobileTeam   # verified active, 60.5K followers, official account
         - MrTelecoms        # verified active, Micky Watkins CEO, 13.8K followers, @MrTelecoms
+        - ShoshinNodes      # OUR account — @ShoshinNodes, verified, joined Dec 2024, 326 followers, 0 posts (as of 2026-07-05)
         # NOTE: wmtmicko, MicMicko, PartsOfaCircle — all suspended as of 2026-07-05
       tweet_text_regex: "(?i)world ?mobile|\\$wmtx|earth ?node|air ?node|ember ?node|depin telecom|network builder"
       hashtags_any:
