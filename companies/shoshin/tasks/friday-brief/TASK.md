@@ -10,9 +10,9 @@ Every Friday 16:00 Europe/Amsterdam. Content Manager compiles and delivers the w
 
 ## Workflow
 
-1. Read platform analytics from `.evidence/metrics/` (human-pasted data for v0.1).
-2. Read wiki lint report from `.evidence/wiki/<niche>/_lint/<today>.md` (produced by weekly-wiki-lint at 15:30).
-3. Read approved and rejected draft logs from `.evidence/approved/` and `.evidence/rejected/`.
+1. Read platform analytics from `.evidence/metrics/` (human-pasted data).
+2. Read approved and rejected draft logs from `.evidence/approved/` and `.evidence/rejected/`.
+3. Query gbrain MCP for any World Mobile developments from the past week worth flagging.
 4. Produce weekly brief covering:
    - **What shipped**: posts that went live this week, per platform
    - **What worked**: top-3 posts by engagement, with the hook pattern that fired

@@ -10,15 +10,15 @@ Every Monday 10:00 Europe/Amsterdam. Content Manager runs the weekly content pla
 
 ## Workflow
 
-1. Read Scout trend files from `.evidence/trends/` (last 7 days).
-2. Query the knowledge base via `knowledge-query` for each active niche in `COMPANY.md:niches` (today: world-mobile).
-3. Select 3-5 topics per niche. For each topic, produce a brief:
+1. Read trend files from `.evidence/trends/` (last 7 days).
+2. Query gbrain MCP for each active niche in `COMPANY.md:niches` to surface relevant knowledge, recent developments, and content gaps.
+3. Select 3-5 topics per niche. For each topic produce a brief:
    - topic name
    - niche slug
    - audience segment (from `audience-profiles` skill — no ad-hoc segments)
    - primary platform (X is default Day-1)
    - assigned angle
-   - 3-5 key facts or claims from the knowledge base to anchor the draft
+   - 3-5 key facts or claims from gbrain to anchor the draft
    - any compliance flags to carry forward
 4. Save queue to `.evidence/strategy/YYYY-WW-queue.md`.
 5. For each topic, write a brief file to `.evidence/drafts/YYYY-MM-DD-<topic>/brief.md`.
@@ -33,3 +33,4 @@ All briefs written, Content Writer has been assigned, approved drafts queued for
 - Never auto-publish. Human approves every post before it goes live.
 - Never exceed 5 topics per niche per week.
 - Briefs must be concrete enough that Writer does not need to ask clarifying questions.
+- If gbrain has no coverage on a topic, note the gap in the brief rather than fabricating facts.
