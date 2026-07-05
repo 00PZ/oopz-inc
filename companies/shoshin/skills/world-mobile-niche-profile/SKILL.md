@@ -127,8 +127,8 @@ knowledge_sources:
     selector:
       author_username_in:
         - WorldMobileTeam   # verified active, 60.5K followers, official account
+        - MrTelecoms        # verified active, Micky Watkins CEO, 13.8K followers, @MrTelecoms
         # NOTE: wmtmicko, MicMicko, PartsOfaCircle — all suspended as of 2026-07-05
-        # TODO: identify active CEO / community leader handles and add here
       tweet_text_regex: "(?i)world ?mobile|\\$wmtx|earth ?node|air ?node|ember ?node|depin telecom|network builder"
       hashtags_any:
         - WorldMobile
