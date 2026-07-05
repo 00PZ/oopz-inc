@@ -28,6 +28,41 @@ World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom 
 | **EmberNode** | Ruggedized outdoor fiber gateway (street cabinet). Sits between ISP backbone and AirNodes. Deployed in Pakistan. Rewards based on verified traffic (~$0.004167/GB, ~$3.33/month at 800GB benchmark). Sold in drops from $145–165/unit. |
 | **Spark AirNode** | Entry-level AirNode variant. Pairs with EmberNode for backhaul. Fixed reward $1.90/month (with NFT staking). |
 
+### Whitepaper (2021 — foundational)
+**Title:** "World Mobile Chain: A blockchain based solution to empower a sharing economy for telecommunications infrastructure"
+**Source:** https://worldmobiletoken.com/WhitePaper.pdf — 12 pages, World Mobile Token Ltd., British Virgin Islands
+**⚠️ Note:** Written 2021 on Cardano. WM has since migrated to EVM (L3 on Base). The economic thesis is intact; specific tech references (Ouroboros, Atala Prism, Cardano Plutus) are superseded.
+
+**Core thesis:** Existing operators can't bridge the digital divide because their business model is centralised and cost-heavy (~60% opex, -0.21% CAGR improvement). WM fixes this with: (1) sharing economy — communities own and operate nodes; (2) blockchain — removes intermediaries, enables trustless rewards via smart contracts; (3) token incentives — node operators earn from providing real services, not speculation.
+
+**Original node architecture:**
+- **Earth Nodes** — core logic: DID (identity), blockchain (ledger), telecom routing. Minimum stake: 100,000 WMT. Earn block production rewards + routing fees.
+- **Air Nodes** — access layer, radio coverage. Earn proportional share of country revenue (scales to 10% as volumes increase).
+- **Aether Nodes** — legacy telco interop, protocol translation. Minimum stake: 1,000,000 WMT. (Equivalent to modern EmberNode concept.)
+
+**Token distribution (original 2bn supply):**
+| Group | % |
+|---|---|
+| Node Operators / Staking | 29% |
+| Inflation Rewards (20yr) | 29% |
+| Co-founders & Team | 19.25% |
+| WM Operations Fund | 18% |
+| Partnerships | 7.85% |
+| Advisors | 5.9% |
+| Public Sale | 10% |
+| Private Sale | 2.5% |
+| Early Staking Rewards | 2.5% |
+| Incentive Rewards | 3% |
+| WM Community Fund | 2% |
+
+**Inflation model:** 11.41% p.a. initial rate, decreasing monthly (rate / (months + 1)). Zero inflation at year 20. Total inflation = 29% of 2bn aggregate supply.
+
+**Key content angles from the whitepaper:**
+- The "why" story: 50% of the world still unconnected in 2021 despite 20 years of 3G and billions spent by Google/Alphabet (Loon project shut down as commercially unviable). WM's answer is the sharing economy.
+- Fraud in telecom: $29B/year lost. WM's DID fixes subscriber fraud at the root.
+- Smart contracts reduce settlement from days to near-instant — a real operational advantage.
+- 60% of operator costs are opex. Sharing economy cuts maintenance, security, leasing. This is the economic moat.
+
 ### Blockchain & Token
 - **World Mobile Chain (WMC)** — EVM-compatible L1, purpose-built for telecom. Handles subscriber identity, eSIM provisioning, billing, DID, DeFi. Mainnet live. 3.28M accounts, 53.5M total transactions, 159.6K txns/day (2026-07-05).
 - **$WMTX** — World Mobile Token. Fixed supply: 2 billion. Circulating: 853.3M (42.7%). Always use `$WMTX`, never `$WMT`.
