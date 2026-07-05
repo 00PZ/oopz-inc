@@ -195,7 +195,8 @@ knowledge_sources:
       author_username_in:
         # Official accounts
         - WorldMobileTeam   # ✅ verified, 60.5K followers, official account
-        - wmtoken           # ✅ active (worldmobilechain / @wmchain), 358 followers, 0 posts — low signal for now
+        - wmchain           # ✅ verified, World Mobile Chain, 78.1K followers, 10.4K posts — high-signal, very active
+        # NOTE: wmtoken (358 followers, 0 posts) redirects to @wmchain — use wmchain
         - worldmobileesim   # ✅ verified, 1,082 followers, 138 posts — travel eSIM focused
         - MrTelecoms        # ✅ verified, Micky Watkins CEO, 13.8K followers
         - MikeWorldMobile   # ⚠️ SUSPENDED as of 2026-07-05 (old CMO handle)
