@@ -1,69 +1,28 @@
 schema: paperclip/v1
-# Deliberately minimal. Agents do NOT need any DB credentials.
-# Database access is confined to external scripts in assets/scripts/,
-# which run outside Paperclip (user shell, Trigger.dev, cron). Agents
-# consume the resulting markdown in .evidence/knowledge/<niche-slug>/.
-#
-# Add per-agent env overrides here ONLY when a real need surfaces
-# (e.g. GH_TOKEN for an agent that files issues on GitHub).
-# Runtime handles API keys. Do not set an adapter unless Shoshin
-# targets a specific runtime.
 
-# MCP servers (local, per-company)
-# qmd provides hybrid BM25 + vector search over compiled wiki pages.
-# Preferred: MCP integration via Paperclip's MCP client (stdio transport).
-# Fallback: if Paperclip rejects this schema, Librarian shells out via Bash tool:
-#   qmd query "<question>" -c <niche> --json --min-score 0.3 -n 15
+# MCP servers
+# gbrain: shared institutional memory (World Mobile knowledge, project state, niche intel)
+# In-cluster HTTP MCP. Agents query via natural language. No API keys required.
+# Docs: https://github.com/garrytan/gbrain/blob/master/docs/tutorials/company-brain.md
 mcp_servers:
-  qmd:
-    command: qmd
-    args: [mcp]
-    # For long-lived shared daemon instead, use HTTP transport:
-    # url: http://localhost:8181/mcp
-    # Start separately: qmd mcp --http --daemon
-
-  # GBrain: shared institutional memory (World Mobile knowledge, project state, niche intel)
-  # In-cluster HTTP MCP — no auth needed (same namespace group, internal only)
-  # gbrain docs: https://github.com/garrytan/gbrain/blob/master/docs/tutorials/company-brain.md
   gbrain:
     url: http://gbrain-jarvis-company.gbrain.svc.cluster.local:3131/mcp
 
 # Routines (scheduled agent tasks)
 # Each routine slug matches a tasks/<slug>/TASK.md body.
-# Paperclip's Routine system fires the assignee agent at each cron tick.
+# Paperclip fires the assignee agent at each cron tick.
 # Defaults: concurrencyPolicy=coalesce_if_active, catchUpPolicy=skip_missed.
 # All times Europe/Amsterdam.
 routines:
-  # Updated 2026-07-05: reduced from 10 to 7 routines (2-agent refactor)
-  nightly-wiki-compile:
-    triggers:
-      - kind: schedule
-        cronExpression: "0 2 * * *"
-        timezone: Europe/Amsterdam
-  nightly-qmd-reindex:
-    triggers:
-      - kind: schedule
-        cronExpression: "30 2 * * *"
-        timezone: Europe/Amsterdam
   trend-scan:
     triggers:
       - kind: schedule
         cronExpression: "0 6 * * *"
         timezone: Europe/Amsterdam
-  clippings-ingest:
-    triggers:
-      - kind: schedule
-        cronExpression: "0 7 * * *"
-        timezone: Europe/Amsterdam
   weekly-sprint:
     triggers:
       - kind: schedule
         cronExpression: "0 10 * * 1"
-        timezone: Europe/Amsterdam
-  weekly-wiki-lint:
-    triggers:
-      - kind: schedule
-        cronExpression: "30 15 * * 5"
         timezone: Europe/Amsterdam
   friday-brief:
     triggers:
