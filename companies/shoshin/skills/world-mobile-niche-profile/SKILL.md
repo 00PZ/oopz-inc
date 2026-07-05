@@ -10,12 +10,15 @@ last_verified: 2026-07-05
 
 World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom project. It builds community-owned mobile networks using blockchain incentives. The mission: connect the 4–5 billion people who still lack reliable internet — starting with underserved markets (Zanzibar, Tanzania, Pakistan, Philippines), expanding globally.
 
-### Network (updated Jul 2026)
-- **155,000+ AirNodes** deployed globally (May 2026 — Atmosphere Grid article)
-- **100,000+ AirNodes** was the Jan 2026 milestone; 145,000+ was mid-2025 compound figure
-- **3 million Daily Active Users** (Jan 2026)
-- **$2M+ in rewards** paid to node operators to date
-- ⚠️ Stats change frequently — always verify from Ecosystem Metrics Dashboard before publishing
+### Network (live 2026-07-05 — wmtx-utility.worldmobile.io)
+- **158,000 AirNodes** (Token Statistics tab) / **148,700** (Telecom Economy tab) — two dashboards, slight lag between them. Use the lower figure; note the discrepancy if exact count matters.
+- **3.5M Daily Active Users** (updated from 3M Jan 2026 milestone)
+- **2,764 TiB** data consumed in 24h (massive real-world usage signal)
+- **155,500** cumulative community members
+- **57,900+ holders** on-chain across 7 chains (on-chain count; ecosystem metrics shows 80.9K — different methodology)
+- **47.2M $WMTX** paid in EarthNode staking rewards (total, all-time)
+- **92.4M $WMTX** paid in early staking rewards (total, all-time)
+- ⚠️ Stats refresh every 5 minutes — always pull live from dashboard before publishing
 
 ### Node Types
 | Node | Role |
@@ -26,9 +29,61 @@ World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom 
 | **Spark AirNode** | Entry-level AirNode variant. Pairs with EmberNode for backhaul. Fixed reward $1.90/month (with NFT staking). |
 
 ### Blockchain & Token
-- **World Mobile Chain (WMC)** — EVM-compatible L1, purpose-built for telecom. Handles subscriber identity, eSIM provisioning, billing, DID, DeFi. Mainnet live.
-- **$WMTX** — World Mobile Token. Fixed supply: 2 billion. Was $WMT on Cardano. Migrated to EVM (World Mobile Chain). Also on Solana and Base. Always use `$WMTX`, never `$WMT`.
+- **World Mobile Chain (WMC)** — EVM-compatible L1, purpose-built for telecom. Handles subscriber identity, eSIM provisioning, billing, DID, DeFi. Mainnet live. 3.28M accounts, 53.5M total transactions, 159.6K txns/day (2026-07-05).
+- **$WMTX** — World Mobile Token. Fixed supply: 2 billion. Circulating: 853.3M (42.7%). Always use `$WMTX`, never `$WMT`.
+- **Live price** (2026-07-05): $0.0355. Circ. market cap: $30.3M. Fully diluted: $71.1M. 30d trading volume: $65.9M.
+- **Deployed on 7 chains**: World Mobile Chain (native), Ethereum, Base, BNB Chain, Arbitrum, Solana, Cardano.
+  - BNB Chain: most holders (28,189) and most 24h trading (11,981 txns)
+  - Base: ~10,019 holders — active reward pool acquisition chain
+  - Cardano: 16,402 holders — legacy community from $WMT era, still significant
 - **Exchange listings (verified)**: Binance, Coinbase (Nov 2025), Kraken (Sep 2025, first US Tier-1), Bitvavo (Dec 2025)
+
+### Reward Pool Mechanics (CRITICAL — understand before writing tokenomics content)
+Source: https://wmtx-utility.worldmobile.io — live data, auto-refreshed every 5 minutes. All percentages illustrative.
+
+**The loop (3 steps):**
+1. Network earns revenue from subscribers (real fiat from real customers)
+2. A share buys $WMTX on the open market (illustrative: 8.33% from 4 of the 5 engines)
+3. That $WMTX is paid to EarthNode operators (run services) and stakers (secure network) — NOT to passive holders
+
+**5 revenue engines:**
+| Engine | Routes to | Notes |
+|---|---|---|
+| Direct plans + eSIMs | Reward Pool | Live today |
+| StratoMast (HAPS) | Reward Pool | 5G from 60,000 ft; 15,000 km² coverage per platform; up to 500K users direct-to-device |
+| MVNE partners | Reward Pool | Brands/celebrities launching MVNOs on WM rails |
+| AirNode wholesale | Reward Pool | Roaming traffic from other networks at wholesale rates |
+| AirNode WMTx fees | World Mobile Chain direct | Native token demand — NOT through reward pool |
+| WMG treasury | Reward Pool (discretionary) | Not fixed, not guaranteed — supplementary support only |
+
+**Verifiable on-chain:** Acquisition wallet `0x202d…1cf2`. In 30 days to 2026-07-05: **57,320 WMTx across 13 acquisitions** (~$2,035 at current price). Buys happen every 2–7 days on Base and BNB Chain. Anyone can check the World Mobile Chain explorer.
+
+**⚠️ Content angle — honest coverage:** 57,320 WMTx/month is modest at current price. The mechanism is real and on-chain, but the pool is small relative to network scale. The thesis is that reward volume scales with subscriber revenue — cover this honestly. The key variable is subscriber growth velocity, not token price.
+
+**Key distinction to always make in content:** WMTx rewards compensate operators and stakers doing work. Passive holding does NOT entitle anyone to rewards. This is economically different from most crypto projects and worth explaining clearly to both audience segments.
+
+### DePIN Competitive Landscape (2026-07-05)
+Source: wmtx-utility.worldmobile.io DePIN tab — CoinGecko, score = momentum (40%) + liquidity (30%) + market rank (30%)
+
+| Token | Category | Market Cap | 24h Vol | Score |
+|---|---|---|---|---|
+| TAO (Bittensor) | AI | $2B | $96.6M | 65.4 |
+| RENDER | Compute | $826.5M | $31.7M | 57.9 |
+| FIL (Filecoin) | Storage | $624.9M | $40.7M | 64.9 |
+| GRASS | Bandwidth | $338.3M | $27.4M | 76.4 |
+| GRT (The Graph) | Data | $200.6M | $11.0M | 53.6 |
+| AKT (Akash) | Compute | $181.6M | $3.3M | 40.3 |
+| ATH (Aethir) | Compute | $90.3M | $9.5M | 64.3 |
+| **HNT (Helium)** | **Wireless** | **$43.8M** | **$2.9M** | **37.6** |
+| **WMTX** | **Wireless** | **$30.6M** | **$1.1M** | **32.1** |
+| Althea | Wireless | $554K | $748 | 18.9 |
+| XNET, Karrier One, Wayru, Pollen | Wireless | — | — | — |
+
+**Content angles from this data:**
+- **WMTX vs HNT:** nearest wireless DePIN peer. HNT market cap 1.4× ours, but WM has 3.5M DAU and 158K AirNodes. Real-usage argument: network fundamentals are asymmetric vs market cap.
+- **Score 32.1 = liquidity drag.** Momentum and fundamentals are decent; liquidity score pulls rank down. This is the core contrarian thesis — market hasn't priced actual usage.
+- **30d trading volume ($65.9M) >> circ. market cap ($30.3M).** High speculative turnover. Operator community is the stable base; traders cycle in/out. Explain the difference.
+- **Wireless DePIN is a small niche** — XNET, Karrier One, Wayru, Pollen all have no liquid market. WM is the largest wireless DePIN with real liquidity after HNT.
 
 ### Key Products
 - **Network Builder** — Hex territory auctions launched Dec 22, 2025. Operators claim coverage areas, Helium-influenced. Mobile app on Android.
@@ -181,6 +236,7 @@ knowledge_sources:
       url_patterns:
         - "worldmobile.io/blog/*"
         - "airnode.worldmobile.net/*"
+        - "wmtx-utility.worldmobile.io/*"
         - "depin.ninja/*"
       rss_feeds:
         - "https://worldmobile.io/feed.xml"   # TODO: verify this endpoint is live before first seed run
