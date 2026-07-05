@@ -1,29 +1,83 @@
 ---
 name: world-mobile-niche-profile
-description: Niche-specific overlay for World Mobile (DePIN telecom, $WMTX token). Third-party independent creator posture. Overrides brand-voice-system defaults. Declares knowledge_sources for x-posts and web-article adapters. STUB, verify and refine before Day-1 posts.
+description: Niche-specific overlay for World Mobile (DePIN telecom, $WMTX token). Third-party independent creator posture. Overrides brand-voice-system defaults. Declares knowledge_sources for x-posts and web-article adapters. Verified 2026-07-05.
 static: true
 editable_by: human
+last_verified: 2026-07-05
 ---
-
-## STUB NOTICE
-
-> **STUB NOTICE**: This skill is seeded from public-knowledge defaults. Verify and refine with primary sources (World Mobile whitepaper, official docs, current $WMTX ticker) before Day-1 posts. Ronin principle: iterate weekly.
 
 ## Niche Identity
 
-World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom project. It builds community-owned mobile networks using blockchain incentives. Key concepts: Earth Nodes (ground infrastructure), AirNodes (connectivity devices), $WMTX token (utility token for network participation), focus on underserved markets (Africa, Southeast Asia). Ethos: connectivity as a right, infrastructure ownership for underserved markets, hybrid dynamic spectrum sharing with blockchain rewards.
+World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom project. It builds community-owned mobile networks using blockchain incentives. The mission: connect the 4–5 billion people who still lack reliable internet — starting with underserved markets (Zanzibar, Tanzania, Pakistan, Philippines), expanding globally.
+
+### Network (verified Jan 2026)
+- **100,000+ AirNodes** deployed globally (Jan 2026 milestone)
+- **3 million Daily Active Users** (Jan 2026)
+- **145,000+ AirNodes** as of mid-2025 (latest compound figure in gbrain)
+- **$2M+ in rewards** paid to node operators to date
+
+### Node Types
+| Node | Role |
+|------|------|
+| **AirNode** | Physical radio hardware deployed by community operators. Provides local wireless coverage. Core DePIN unit. Earns $WMTX for uptime and data carried. |
+| **EarthNode** | Validator and processor. Runs the World Mobile Chain (transactions, DID, telecom routing). Operated via EarthNode NFTs (ENNFTs). |
+| **EmberNode** | Ruggedized outdoor fiber gateway (street cabinet). Sits between ISP backbone and AirNodes. Deployed in Pakistan. Rewards based on verified traffic (~$0.004167/GB, ~$3.33/month at 800GB benchmark). Sold in drops from $145–165/unit. |
+| **Spark AirNode** | Entry-level AirNode variant. Pairs with EmberNode for backhaul. Fixed reward $1.90/month (with NFT staking). |
+
+### Blockchain & Token
+- **World Mobile Chain (WMC)** — EVM-compatible L1, purpose-built for telecom. Handles subscriber identity, eSIM provisioning, billing, DID, DeFi. Mainnet live.
+- **$WMTX** — World Mobile Token. Fixed supply: 2 billion. Was $WMT on Cardano. Migrated to EVM (World Mobile Chain). Also on Solana and Base. Always use `$WMTX`, never `$WMT`.
+- **Exchange listings (verified)**: Binance, Coinbase (Nov 2025), Kraken (Sep 2025, first US Tier-1), Bitvavo (Dec 2025)
+
+### Key Products
+- **Network Builder** — Hex territory auctions launched Dec 22, 2025. Operators claim coverage areas, Helium-influenced.
+- **US phone plans** — live, onboarding Network Founders
+- **Travel eSIMs** — global
+- **Stratospheric** — HAPS (High Altitude Platform Station) vertical. Aircraft acquired (Britten-Norman Islander). Targets governments, carriers, remote deployments. Underexplained publicly — strong content opportunity.
+- **Ecosystem Metrics Dashboard** — live at worldmobile.io. Shows DAU, AirNode count, staking rewards, WMTx holders, revenue breakdowns. Use for data-backed content.
+
+### Notable Partnerships (verified from primary sources)
+- DITO Telecom (Philippines, 13M users onchain)
+- Integrity Technologies Corp (rural/tribal USA connectivity)
+- Wi-Fi Alliance (alongside Apple, AT&T, Qualcomm)
+- 51nodes + IABG (Europe DePIN)
+- Zebec (ZebecNET, real-time finance + connectivity)
+- CWC (Philippines AirNode deployment acceleration)
+- Coinbase X402 (internet-native payments integration)
+
+### Community Tensions (contrarian content angles)
+These are legitimate community concerns — covering them honestly builds trust with the `depin-natives` segment:
+- **Operator ROI**: $2M total rewards across 145K+ nodes is modest. ROI math is a recurring question. Don't dismiss it.
+- **Cardano → EVM migration**: meaningful identity shift for a portion of original community. Still worth monitoring sentiment.
+- **Stratospheric narrative gap**: most community members don't understand how the stratospheric layer connects to ground DePIN economics. Explain it.
+- **Reward rate vs node count gap**: data gap between deployed hardware and returns — address honestly.
+
+---
 
 ## Operator Posture (CRITICAL)
 
 Shoshin is a THIRD-PARTY INDEPENDENT CREATOR covering World Mobile. Shoshin is not affiliated with World Mobile Group Ltd. All content must make this posture unambiguous. See `[[compliance-rules]]` for disclosure requirements.
 
+---
+
 ## Audience
 
-Primary: `depin-natives` (crypto-literate, token holders, node operators). Secondary: `connectivity-curious` (tech-forward, interested in underserved-market narratives). Import from `[[audience-profiles]]` and apply these overrides: depin-natives voice = technical, DYOR-respecting, skeptical of hype; connectivity-curious voice = accessible, narrative-driven.
+Primary: `depin-natives` (crypto-literate, token holders, node operators). Secondary: `connectivity-curious` (tech-forward, interested in underserved-market narratives). Import from `[[audience-profiles]]` and apply these overrides:
+- `depin-natives` voice = technical, DYOR-respecting, skeptical of hype. Cite sources. Acknowledge ROI concerns openly.
+- `connectivity-curious` voice = accessible, narrative-driven. Lead with the human problem (connectivity gaps) before the solution.
+
+---
 
 ## Voice Override
 
-On top of `[[brand-voice-system]]` defaults: technicality +1 (to 7), contrarianness -1 (to 6, crypto audience punishes baseless FUD). Tonal cue: "We are rigorous, not evangelical." Never hype. Always cite sources.
+On top of `[[brand-voice-system]]` defaults:
+- technicality +1 (to 7) — this audience has done research
+- contrarianness -1 (to 6) — crypto audience punishes baseless FUD; be rigorous not contrarian for its own sake
+- vulnerability +1 (to 5) — occasional "I hold $WMTX, here's what I actually think" builds trust over shill-adjacency
+
+Tonal cue: **"Rigorous insider with no assumed knowledge."** Explain as if to your past self before you knew any of this. Challenge when the data warrants it. Never hype.
+
+---
 
 ## Topic Allow-List (Day 1)
 
@@ -31,8 +85,14 @@ On top of `[[brand-voice-system]]` defaults: technicality +1 (to 7), contrariann
 - African/underserved-market connectivity gaps
 - Open-RAN vs traditional telcos
 - $WMTX token utility (factual, not speculative)
-- Earth Node / AirNode infrastructure (verified facts only)
+- AirNode / EarthNode / EmberNode / Spark AirNode infrastructure (verified facts only)
+- Network Builder mechanics (hex auctions, territory ownership)
+- World Mobile Chain — EVM telecom L1 explained
+- Stratospheric — HAPS explained, what it means for the DePIN story
+- Exchange listings and what they mean for accessibility (factual framing only)
 - Pilot/partnership news (verified primary sources only)
+- Ecosystem Metrics Dashboard data (verifiable on-chain)
+- Community tensions covered honestly (operator ROI, Cardano migration) — these build credibility
 
 ## Topic Deny-List
 
@@ -42,14 +102,21 @@ On top of `[[brand-voice-system]]` defaults: technicality +1 (to 7), contrariann
 - Speculation dressed as fact
 - Unverified partnership claims
 - Anything that implies affiliation with World Mobile Group
+- "Moon" language or guaranteed-return framing
+
+---
 
 ## Required Disclosures
 
-Pulls from `[[compliance-rules]]`. Per-platform disclosure templates apply. Always include: "Not affiliated with World Mobile Group. Not financial advice. DYOR." Use ticker `$WMTX` (not `$WMT`).
+Pulls from `[[compliance-rules]]`. Per-platform disclosure templates apply. Always include: "Not affiliated with World Mobile Group. Not financial advice. DYOR." Use ticker `$WMTX` (not `$WMT`, not `$WMTx`).
+
+---
 
 ## Compounding Note
 
-Analyst should refresh this file weekly with what performs and what does not. Proposed diffs go through the human approval gate before applying.
+Content Manager refreshes this file weekly with what performs and what does not. Proposed diffs go through the human approval gate before applying. Ronin principle: iterate weekly.
+
+---
 
 ## Knowledge Sources
 
@@ -59,17 +126,18 @@ knowledge_sources:
     enabled: true
     selector:
       author_username_in:
-        - WorldMobileTeam
-        - PartsOfaCircle
-        - wmtmicko
-        - MicMicko
-      tweet_text_regex: "(?i)world ?mobile|\\$wmtx|earth ?node|air ?node|depin telecom"
+        - WorldMobileTeam   # verified active, 60.5K followers, official account
+        # NOTE: wmtmicko, MicMicko, PartsOfaCircle — all suspended as of 2026-07-05
+        # TODO: identify active CEO / community leader handles and add here
+      tweet_text_regex: "(?i)world ?mobile|\\$wmtx|earth ?node|air ?node|ember ?node|depin telecom|network builder"
       hashtags_any:
         - WorldMobile
         - WMTX
         - DePIN
         - AirNode
         - EarthNode
+        - EmberNode
+        - NetworkBuilder
       min_engagement:
         like_count: 10
         view_count: 1000
@@ -82,16 +150,22 @@ knowledge_sources:
         - "worldmobile.io/blog/*"
         - "depin.ninja/*"
       rss_feeds:
-        - "https://worldmobile.io/feed.xml"
+        - "https://worldmobile.io/feed.xml"   # TODO: verify this endpoint is live before first seed run
       keyword_any:
         - world mobile
         - wmtx
         - earth node
+        - ember node
+        - airnode
         - depin telecom
+        - network builder
+        - world mobile chain
     refresh_cadence: weekly
 ```
 
-> **STUB**: Author lists and URLs above are seeded from public knowledge. Verify before first seed run. Update author_username_in with confirmed active accounts.
+> **TODO before first seed run**: (1) verify `worldmobile.io/feed.xml` returns valid RSS, (2) identify active X handles for Micky Watkins CEO and key community figures — add to `author_username_in`. Check WorldMobileTeam replies/follows for active community accounts.
+
+---
 
 ## Related Skills
 
