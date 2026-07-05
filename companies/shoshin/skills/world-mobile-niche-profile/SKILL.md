@@ -10,11 +10,12 @@ last_verified: 2026-07-05
 
 World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom project. It builds community-owned mobile networks using blockchain incentives. The mission: connect the 4–5 billion people who still lack reliable internet — starting with underserved markets (Zanzibar, Tanzania, Pakistan, Philippines), expanding globally.
 
-### Network (verified Jan 2026)
-- **100,000+ AirNodes** deployed globally (Jan 2026 milestone)
+### Network (updated Jul 2026)
+- **155,000+ AirNodes** deployed globally (May 2026 — Atmosphere Grid article)
+- **100,000+ AirNodes** was the Jan 2026 milestone; 145,000+ was mid-2025 compound figure
 - **3 million Daily Active Users** (Jan 2026)
-- **145,000+ AirNodes** as of mid-2025 (latest compound figure in gbrain)
 - **$2M+ in rewards** paid to node operators to date
+- ⚠️ Stats change frequently — always verify from Ecosystem Metrics Dashboard before publishing
 
 ### Node Types
 | Node | Role |
@@ -30,11 +31,16 @@ World Mobile is a DePIN (Decentralized Physical Infrastructure Network) telecom 
 - **Exchange listings (verified)**: Binance, Coinbase (Nov 2025), Kraken (Sep 2025, first US Tier-1), Bitvavo (Dec 2025)
 
 ### Key Products
-- **Network Builder** — Hex territory auctions launched Dec 22, 2025. Operators claim coverage areas, Helium-influenced.
+- **Network Builder** — Hex territory auctions launched Dec 22, 2025. Operators claim coverage areas, Helium-influenced. Mobile app on Android.
 - **US phone plans** — live, onboarding Network Founders
 - **Travel eSIMs** — global
 - **Stratospheric** — HAPS (High Altitude Platform Station) vertical. Aircraft acquired (Britten-Norman Islander). Targets governments, carriers, remote deployments. Underexplained publicly — strong content opportunity.
-- **Ecosystem Metrics Dashboard** — live at worldmobile.io. Shows DAU, AirNode count, staking rewards, WMTx holders, revenue breakdowns. Use for data-backed content.
+- **Ecosystem Metrics Dashboard** — live at worldmobile.io. Shows DAU, AirNode count, staking rewards, WMTx holders, revenue breakdowns. Use for data-backed content. ⚠️ Always pull live numbers before publishing — stats change constantly.
+- **EarthNode Agentic Ecosystem** (Mar 2026) — AI agents hold identity, execute tasks, transact in $WMTX across WM network. EarthNodes extended into AI infrastructure layer.
+- **Atmosphere Grid** (May 2026, testnet live) — built on EarthNode Agentic Ecosystem. Single infrastructure layer for autonomous AI agents: sovereign identity + private networking + compute + edge inference + $WMTX micropayments (x402-style). EarthNode Operators earn from AI workloads, not just telecom. Strong content angle — underexplained publicly.
+- **DMVNO / DMVNE program** — partners build their own Decentralized Mobile Virtual Network Operator on WM rails. First live: Brax Sim Unlisted (privacy-first MVNO). Content angle: WM as a platform, not just a network.
+- **Bitcoin Mobile** — Bitcoin-native mobile service launched on WM. DeSo + Bitcoin convergence angle.
+- **Unity Node** — operated by @ShoshinNodes. ⚠️ TODO: research and document. Not on official blog/site as of 2026-07-05. Likely Telegram/Discord announced.
 
 ### Notable Partnerships (verified from primary sources)
 - DITO Telecom (Philippines, 13M users onchain)
@@ -86,12 +92,16 @@ Tonal cue: **"Rigorous insider with no assumed knowledge."** Explain as if to yo
 - Open-RAN vs traditional telcos
 - $WMTX token utility (factual, not speculative)
 - AirNode / EarthNode / EmberNode / Spark AirNode infrastructure (verified facts only)
-- Network Builder mechanics (hex auctions, territory ownership)
+- Network Builder mechanics (hex auctions, territory ownership, Android app)
 - World Mobile Chain — EVM telecom L1 explained
 - Stratospheric — HAPS explained, what it means for the DePIN story
+- Atmosphere Grid — EarthNodes as AI infrastructure; sovereign agent compute + $WMTX settlement
+- EarthNode Agentic Ecosystem — AI agents + DePIN convergence
+- DMVNO / DMVNE — WM as a platform, partner MVNOs (Brax Sim Unlisted example)
+- Bitcoin Mobile — DeSo + Bitcoin angle
 - Exchange listings and what they mean for accessibility (factual framing only)
 - Pilot/partnership news (verified primary sources only)
-- Ecosystem Metrics Dashboard data (verifiable on-chain)
+- Ecosystem Metrics Dashboard data (verifiable on-chain — pull live before publishing)
 - Community tensions covered honestly (operator ROI, Cardano migration) — these build credibility
 
 ## Topic Deny-List
@@ -164,7 +174,7 @@ knowledge_sources:
     refresh_cadence: weekly
 ```
 
-> **TODO before first seed run**: (1) verify `worldmobile.io/feed.xml` returns valid RSS, (2) identify active X handles for Micky Watkins CEO and key community figures — add to `author_username_in`. Check WorldMobileTeam replies/follows for active community accounts.
+> **TODO before first seed run**: (1) verify `worldmobile.io/feed.xml` returns valid RSS. (2) Research Unity Node — not yet on official blog/site, likely Telegram/Discord announced. (3) Find additional active WM community handles to add to `author_username_in`.
 
 ---
 
