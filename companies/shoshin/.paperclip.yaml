@@ -28,6 +28,7 @@ mcp_servers:
 # Defaults: concurrencyPolicy=coalesce_if_active, catchUpPolicy=skip_missed.
 # All times Europe/Amsterdam.
 routines:
+  # Updated 2026-07-05: reduced from 10 to 7 routines (2-agent refactor)
   nightly-wiki-compile:
     triggers:
       - kind: schedule
@@ -38,7 +39,7 @@ routines:
       - kind: schedule
         cronExpression: "30 2 * * *"
         timezone: Europe/Amsterdam
-  trend-scan-morning:
+  trend-scan:
     triggers:
       - kind: schedule
         cronExpression: "0 6 * * *"
@@ -48,12 +49,7 @@ routines:
       - kind: schedule
         cronExpression: "0 7 * * *"
         timezone: Europe/Amsterdam
-  morning-brief:
-    triggers:
-      - kind: schedule
-        cronExpression: "0 8 * * *"
-        timezone: Europe/Amsterdam
-  weekly-content-sprint:
+  weekly-sprint:
     triggers:
       - kind: schedule
         cronExpression: "0 10 * * 1"
@@ -63,18 +59,8 @@ routines:
       - kind: schedule
         cronExpression: "30 15 * * 5"
         timezone: Europe/Amsterdam
-  weekly-analyst-review:
+  friday-brief:
     triggers:
       - kind: schedule
         cronExpression: "0 16 * * 5"
-        timezone: Europe/Amsterdam
-  intelligence-seed:
-    triggers:
-      - kind: schedule
-        cronExpression: "30 17 * * 5"
-        timezone: Europe/Amsterdam
-  trend-scan-evening:
-    triggers:
-      - kind: schedule
-        cronExpression: "0 18 * * *"
         timezone: Europe/Amsterdam
